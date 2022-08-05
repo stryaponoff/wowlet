@@ -17,6 +17,17 @@ module.exports = {
         '@typescript-eslint/no-shadow': ['error'],
         'no-shadow': 'off',
         'no-undef': 'off',
+        '@typescript-eslint/explicit-member-accessibility': ['error', {
+          accessibility: 'explicit',
+          overrides: {
+            accessors: 'explicit',
+            constructors: 'no-public',
+            methods: 'explicit',
+            properties: 'explicit',
+            parameterProperties: 'explicit',
+          },
+        }],
+        '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
       },
     },
   ],
