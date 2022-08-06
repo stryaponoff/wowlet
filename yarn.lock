@@ -2820,11 +2820,13 @@ __metadata:
     deepmerge: ^4.2.2
     eslint: ^7.32.0
     i18next: ^21.8.16
+    intl-pluralrules: ^1.3.1
     inversify: ^6.0.1
     inversify-react: ^1.0.2
     jest: ^26.6.3
     metro-react-native-babel-preset: ^0.70.3
     mobx: ^6.6.1
+    mobx-persist-store: ^1.0.6
     mobx-react: ^7.5.2
     react: 18.0.0
     react-i18next: ^11.18.3
@@ -5928,6 +5930,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"intl-pluralrules@npm:^1.3.1":
+  version: 1.3.1
+  resolution: "intl-pluralrules@npm:1.3.1"
+  checksum: b22c2373b6b658e5a361d9d1e9a3d4478862a79a9723b910d29745ff6b5b78d8e1e10c47f344bd3835219b77d2f6cfd58388c1bab3b5daf4df72555e02342b40
+  languageName: node
+  linkType: hard
+
 "invariant@npm:^2.2.4":
   version: 2.2.4
   resolution: "invariant@npm:2.2.4"
@@ -8013,6 +8022,15 @@ __metadata:
   bin:
     mkdirp: bin/cmd.js
   checksum: a96865108c6c3b1b8e1d5e9f11843de1e077e57737602de1b82030815f311be11f96f09cce59bd5b903d0b29834733e5313f9301e3ed6d6f6fba2eae0df4298f
+  languageName: node
+  linkType: hard
+
+"mobx-persist-store@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "mobx-persist-store@npm:1.0.6"
+  peerDependencies:
+    mobx: "*"
+  checksum: 0fc68ed693bb8dec8dcea6a8508888b79673d89fb38b77dfe0f76537411e45e08232c0de21b59b3c142ced0404b8b9ebf3153a57e1a4a4f5c18fabfe02ba7bc0
   languageName: node
   linkType: hard
 

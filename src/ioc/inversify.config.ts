@@ -1,19 +1,26 @@
 import { Container } from 'inversify'
 import { Services } from '@/ioc/services'
 
-import CameraServiceInterface from '@/services/camera/CameraServiceInterface'
+import type CameraServiceInterface from '@/services/camera/CameraServiceInterface'
 import CameraService from '@/services/camera/CameraService'
 
-import BarcodeServiceInterface from '@/services/barcode/BarcodeServiceInterface'
+import type BarcodeServiceInterface from '@/services/barcode/BarcodeServiceInterface'
 import BarcodeService from '@/services/barcode/BarcodeService'
 
-import ThemeServiceInterface from '@/services/theme/ThemeServiceInterface'
+import type ThemeServiceInterface from '@/services/theme/ThemeServiceInterface'
 import ThemeService from '@/services/theme/ThemeService'
+
+import type LanguageServiceInterface from '@/services/language/LanguageServiceInterface'
+import LanguageService from '@/services/language/LanguageService'
+
+import { MainStore } from '@/services/store/MainStore'
 
 const container = new Container()
 
+container.bind<LanguageServiceInterface>(Services.LanguageService).to(LanguageService).inSingletonScope()
 container.bind<CameraServiceInterface>(Services.CameraService).to(CameraService).inSingletonScope()
 container.bind<BarcodeServiceInterface>(Services.BarcodeService).to(BarcodeService).inSingletonScope()
 container.bind<ThemeServiceInterface>(Services.ThemeService).to(ThemeService).inSingletonScope()
+container.bind<MainStore>(Services.MainStore).to(MainStore).inSingletonScope()
 
 export default container

@@ -4,7 +4,8 @@ import { HomeScreen, HomeScreenName } from '@/screens/HomeScreen'
 import { Appbar } from 'react-native-paper'
 import { ScanResultScreen, ScanResultScreenName } from '@/screens/ScanResultScreen'
 import { ScanScreen, ScanScreenName } from '@/screens/ScanScreen'
-import { Barcode } from '@/services/barcode/types'
+import type { Barcode } from '@/services/barcode/types'
+import { useTranslation } from 'react-i18next'
 
 export type MainNavigatorParamList = {
   [HomeScreenName]: undefined
@@ -17,7 +18,7 @@ export type MainNavigatorParamList = {
 const Stack = createStackNavigator<MainNavigatorParamList>()
 
 export const MainNavigator: React.FC = () => {
-  // const { t } = useTranslation() // TODO : Enable translations
+  const { t } = useTranslation()
 
   return (
     <Stack.Navigator
@@ -29,8 +30,9 @@ export const MainNavigator: React.FC = () => {
             <Appbar.Content title={route.name} />
           </Appbar.Header>
         ),
-      }}>
-      <Stack.Screen name={HomeScreenName} component={HomeScreen} />
+      }}
+    >
+      <Stack.Screen name={HomeScreenName} component={HomeScreen} options={{ title: t('HomeScreen.title') }} />
       <Stack.Screen name={ScanScreenName} component={ScanScreen} />
       <Stack.Screen name={ScanResultScreenName} component={ScanResultScreen} />
     </Stack.Navigator>
