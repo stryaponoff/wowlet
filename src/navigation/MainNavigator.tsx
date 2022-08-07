@@ -17,17 +17,17 @@ export type MainNavigatorParamList = {
 
 const Stack = createStackNavigator<MainNavigatorParamList>()
 
-export const MainNavigator: React.FC = () => {
+const MainNavigator: React.FC = () => {
   const { t } = useTranslation()
 
   return (
     <Stack.Navigator
       initialRouteName={HomeScreenName}
       screenOptions={{
-        header: ({ navigation, route }) => (
+        header: ({ navigation, options }) => (
           <Appbar.Header mode="center-aligned">
             {navigation.canGoBack() && <Appbar.BackAction onPress={() => navigation.goBack()} />}
-            <Appbar.Content title={route.name} />
+            <Appbar.Content title={options.title} />
           </Appbar.Header>
         ),
       }}
@@ -38,3 +38,5 @@ export const MainNavigator: React.FC = () => {
     </Stack.Navigator>
   )
 }
+
+export default MainNavigator

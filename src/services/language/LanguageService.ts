@@ -21,7 +21,7 @@ export default class LanguageService implements LanguageServiceInterface {
   constructor(
     protected readonly i18n = i18next,
     protected readonly namespaceSeparator = ':',
-    protected readonly keySeparator = ':',
+    protected readonly keySeparator = '.',
     protected readonly fallbackLanguage: Language = 'en',
     protected readonly namespaces = [
       'default',
@@ -55,37 +55,6 @@ export default class LanguageService implements LanguageServiceInterface {
       if (this.onInitCompleteListener) {
         this.onInitCompleteListener()
       }
-    })
-  }
-
-  public init(): Promise<void> {
-    return new Promise(resolve => {
-      const lng: Language = this.getDefaultLanguage()
-      const defaultNamespace: typeof this.namespaces[number] = 'default'
-      const resources: LanguageResources<typeof this.namespaces[number]> = {
-        en: {
-          default: messagesEn,
-        },
-      }
-
-      this.i18n.use(initReactI18next).init({
-        lng,
-        fallbackLng: this.fallbackLanguage,
-        ns: this.namespaces,
-        defaultNS: defaultNamespace,
-
-        nsSeparator: this.namespaceSeparator,
-        keySeparator: this.keySeparator,
-
-        resources,
-
-        interpolation: {
-          escapeValue: false,
-        },
-      }, () => {
-        this._isInitialized = true
-        resolve()
-      })
     })
   }
 

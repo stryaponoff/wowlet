@@ -1,7 +1,7 @@
 import React from 'react'
 import { createNavigationContainerRef } from '@react-navigation/core'
 import type { MainNavigatorParamList } from '@/navigation/MainNavigator'
-import { MainNavigator } from '@/navigation/MainNavigator'
+import MainNavigator from '@/navigation/MainNavigator'
 import { NavigationContainer } from '@react-navigation/native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { Provider as PaperProvider } from 'react-native-paper'
@@ -10,16 +10,19 @@ import { observer } from 'mobx-react'
 import type { MainStore } from '@/services/store/MainStore'
 import { useInjection } from 'inversify-react'
 import { Services } from '@/ioc/services'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 export const navigationRef = createNavigationContainerRef<MainNavigatorParamList>()
 
 const Content: React.FC<{ store: MainStore }> = observer(({ store }) => (
   <PaperProvider theme={store.theme}>
-    <NavigationContainer ref={navigationRef} theme={store.theme}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <MainNavigator />
-      </GestureHandlerRootView>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer ref={navigationRef} theme={store.theme}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <MainNavigator />
+        </GestureHandlerRootView>
+      </NavigationContainer>
+    </SafeAreaProvider>
   </PaperProvider>
 ))
 
