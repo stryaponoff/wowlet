@@ -1,14 +1,16 @@
-import { Theme, ThemeType } from '@/services/theme/types'
-import { Appearance, ColorValue, StatusBarStyle } from 'react-native'
-import AppearanceListener = Appearance.AppearanceListener
+import type { Theme, ThemeType } from '@/services/theme/types'
+import type { ColorValue, StatusBarStyle } from 'react-native'
+import type { ThemeTypeWithAuto } from '@/services/theme/types'
 
 export default interface ThemeServiceInterface {
-  getLightTheme(): Theme
-  getDarkTheme(): Theme
-  getTheme(themeType: ThemeType): Theme
+  setSystemThemeType(value: ThemeType): void
+  setPreferredThemeType(value: ThemeTypeWithAuto): void
 
+  getThemeType(preferredThemeType: ThemeTypeWithAuto, systemThemeType: ThemeType): ThemeType
+  getTheme(themeType: ThemeType): Theme
   getStatusBarColor(themeType: ThemeType): ColorValue
   getStatusBarStyle(themeType: ThemeType): StatusBarStyle
 
-  subscribeThemeChange(onThemeChange: AppearanceListener): void
+  getStatusBarColor(): ColorValue
+  getStatusBarStyle(): StatusBarStyle
 }

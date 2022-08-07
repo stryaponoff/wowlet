@@ -5,13 +5,26 @@ import { MainNavigator } from '@/navigation/MainNavigator'
 import { NavigationContainer } from '@react-navigation/native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { Provider as PaperProvider } from 'react-native-paper'
-import { useTheme } from '@/providers/themeProvider/useTheme'
 import { useLanguageService } from '@/services/language/hooks'
+import { observer } from 'mobx-react'
+import type { MainStore } from '@/services/store/MainStore'
+import { useInjection } from 'inversify-react'
+import { Services } from '@/ioc/services'
 
 export const navigationRef = createNavigationContainerRef<MainNavigatorParamList>()
 
+const Content: React.FC<{ store: MainStore }> = observer(({ store }) => (
+  <PaperProvider theme={store.theme}>
+    <NavigationContainer ref={navigationRef} theme={store.theme}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <MainNavigator />
+      </GestureHandlerRootView>
+    </NavigationContainer>
+  </PaperProvider>
+))
+
 export default () => {
-  const { currentTheme } = useTheme()
+  const mainStore = useInjection<MainStore>(Services.MainStore)
 
   const { isInit: isLanguageServerInit } = useLanguageService()
   if (!isLanguageServerInit) {
@@ -19,12 +32,6 @@ export default () => {
   }
 
   return (
-    <PaperProvider theme={currentTheme}>
-      <NavigationContainer ref={navigationRef} theme={currentTheme}>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <MainNavigator />
-        </GestureHandlerRootView>
-      </NavigationContainer>
-    </PaperProvider>
+    <Content store={mainStore} />
   )
 }
