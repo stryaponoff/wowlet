@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { StackScreenProps } from '@react-navigation/stack'
-import { MainNavigatorParamList } from '@/navigation/MainNavigator'
-import { useCameraDevices, useFrameProcessor } from 'react-native-vision-camera'
-import { Barcode as VisionCameraBarcode, BarcodeFormat, scanBarcodes } from 'vision-camera-code-scanner'
+import type { StackScreenProps } from '@react-navigation/stack'
+import type { MainNavigatorParamList } from '@/navigation/MainNavigator'
+import { Camera, useCameraDevices, useFrameProcessor } from 'react-native-vision-camera'
+import type { Barcode as VisionCameraBarcode } from 'vision-camera-code-scanner'
+import { BarcodeFormat, scanBarcodes } from 'vision-camera-code-scanner'
 import { ScanResultScreenName } from './ScanResultScreen'
 import { useInjection } from 'inversify-react'
-import CameraServiceInterface from '@/services/camera/CameraServiceInterface'
+import type CameraServiceInterface from '@/services/camera/CameraServiceInterface'
 import { Services } from '@/ioc/services'
 import { Text } from 'react-native-paper'
 import { runOnJS } from 'react-native-reanimated'
-import BarcodeServiceInterface from '@/services/barcode/BarcodeServiceInterface'
-import { Barcode } from '@/services/barcode/types'
+import type BarcodeServiceInterface from '@/services/barcode/BarcodeServiceInterface'
+import type { Barcode } from '@/services/barcode/types'
 import BaseScreenWrapper from '@/components/screens/BaseScreenWrapper'
 import BaseContentWrapper from '@/components/screens/BaseContentWrapper'
 
@@ -49,24 +50,23 @@ export const ScanScreen: React.FC<ScanScreenProps> = ({ navigation }) => {
   }
 
   return (
-      <BaseScreenWrapper>
-        <BaseContentWrapper>
-          {isCameraPermissionsGranted && backCamera ? (
-            // <Camera
-            //   device={backCamera}
-            //   style={StyleSheet.absoluteFill}
-            //   isActive={true}
-            //   frameProcessor={frameProcessor}
-            //   frameProcessorFps={1}
-            // />
-            <View style={{ flex: 1, backgroundColor: '#000' }} />
-          ) : (
-            <View>
-              <Text>No permissions granted</Text>
-            </View>
-          )}
-        </BaseContentWrapper>
-      </BaseScreenWrapper>
+    <BaseScreenWrapper>
+      <BaseContentWrapper>
+        {isCameraPermissionsGranted && backCamera ? (
+          <Camera
+            device={backCamera}
+            style={StyleSheet.absoluteFill}
+            isActive={true}
+            frameProcessor={frameProcessor}
+            frameProcessorFps={1}
+          />
+        ) : (
+          <View>
+            <Text>No permissions granted</Text>
+          </View>
+        )}
+      </BaseContentWrapper>
+    </BaseScreenWrapper>
   )
 }
 

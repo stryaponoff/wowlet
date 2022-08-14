@@ -6,11 +6,16 @@ import { ScanResultScreen, ScanResultScreenName } from '@/screens/ScanResultScre
 import { ScanScreen, ScanScreenName } from '@/screens/ScanScreen'
 import type { Barcode } from '@/services/barcode/types'
 import { useTranslation } from 'react-i18next'
+import { BarcodeScreenName } from '@/screens/BarcodeScreen'
+import { BarcodeScreen } from '@/screens/BarcodeScreen'
 
 export type MainNavigatorParamList = {
   [HomeScreenName]: undefined
   [ScanScreenName]: undefined
   [ScanResultScreenName]: {
+    barcode: Barcode
+  },
+  [BarcodeScreenName]: {
     barcode: Barcode
   }
 }
@@ -33,6 +38,7 @@ const MainNavigator: React.FC = () => {
       }}
     >
       <Stack.Screen name={HomeScreenName} component={HomeScreen} options={{ title: t('HomeScreen.title') }} />
+      <Stack.Screen name={BarcodeScreenName} component={BarcodeScreen} options={{ title: '%card_name%' }} />
       <Stack.Screen name={ScanScreenName} component={ScanScreen} />
       <Stack.Screen name={ScanResultScreenName} component={ScanResultScreen} />
     </Stack.Navigator>

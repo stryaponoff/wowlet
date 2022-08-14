@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import { StackScreenProps } from '@react-navigation/stack'
-import { MainNavigatorParamList } from '@/navigation/MainNavigator'
+import type { StackScreenProps } from '@react-navigation/stack'
+import type { MainNavigatorParamList } from '@/navigation/MainNavigator'
 import { Text } from 'react-native-paper'
 import BarcodeView from '@kichiyaki/react-native-barcode-generator'
 import QRCode from 'react-native-qrcode-svg'
@@ -15,11 +15,13 @@ export const ScanResultScreen: React.FC<ScanResultScreenProps> = ({ route }) => 
   return (
     <BaseScreenWrapper>
       <BaseContentWrapper>
-          <Text variant="bodyLarge">{route.params.barcode.code}</Text>
-          <Text variant="bodyLarge">{route.params.barcode.format}</Text>
-          {route.params.barcode.format === 'QR'
+        <Text variant="bodyLarge">{route.params.barcode.code}</Text>
+        <Text variant="bodyLarge">{route.params.barcode.format}</Text>
+        {
+          route.params.barcode.format === 'QR'
             ? <QRCode value={route.params.barcode.code}/>
-            : <BarcodeView value={route.params.barcode.code} format={route.params.barcode.format}/>}
+            : <BarcodeView value={route.params.barcode.code} format={route.params.barcode.format}/>
+        }
       </BaseContentWrapper>
     </BaseScreenWrapper>
   )

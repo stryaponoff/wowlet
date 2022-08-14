@@ -5,6 +5,13 @@ __metadata:
   version: 6
   cacheKey: 8
 
+"@adrianso/react-native-device-brightness@npm:^1.2.5":
+  version: 1.2.5
+  resolution: "@adrianso/react-native-device-brightness@npm:1.2.5"
+  checksum: 08f5f46d3b9eb71652e3ebc123b26214abca0e6f324ab9a617d4531f2950552f5df3a1c4375c4fee00291b6980d5abc31cfb38c3e49d40863751dd7075fb3875
+  languageName: node
+  linkType: hard
+
 "@ampproject/remapping@npm:^2.1.0":
   version: 2.2.0
   resolution: "@ampproject/remapping@npm:2.2.0"
@@ -2049,7 +2056,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-platform-android@npm:^8.0.2, @react-native-community/cli-platform-android@npm:^8.0.5":
+"@react-native-community/cli-platform-android@npm:^8.0.4, @react-native-community/cli-platform-android@npm:^8.0.5":
   version: 8.0.5
   resolution: "@react-native-community/cli-platform-android@npm:8.0.5"
   dependencies:
@@ -2066,7 +2073,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-platform-ios@npm:^8.0.2, @react-native-community/cli-platform-ios@npm:^8.0.4":
+"@react-native-community/cli-platform-ios@npm:^8.0.4":
   version: 8.0.4
   resolution: "@react-native-community/cli-platform-ios@npm:8.0.4"
   dependencies:
@@ -2144,7 +2151,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/cli@npm:^8.0.3":
+"@react-native-community/cli@npm:^8.0.4":
   version: 8.0.5
   resolution: "@react-native-community/cli@npm:8.0.5"
   dependencies:
@@ -2795,6 +2802,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "Wallet@workspace:."
   dependencies:
+    "@adrianso/react-native-device-brightness": ^1.2.5
     "@babel/core": ^7.12.9
     "@babel/plugin-proposal-decorators": ^7.18.10
     "@babel/plugin-proposal-numeric-separator": ^7.18.6
@@ -2819,7 +2827,7 @@ __metadata:
     babel-plugin-transform-typescript-metadata: ^0.3.2
     deepmerge: ^4.2.2
     eslint: ^7.32.0
-    i18next: ^21.8.16
+    i18next: ^21.9.0
     intl-pluralrules: ^1.3.1
     inversify: ^6.0.1
     inversify-react: ^1.0.2
@@ -2830,16 +2838,16 @@ __metadata:
     mobx-react: ^7.5.2
     react: 18.0.0
     react-i18next: ^11.18.3
-    react-native: 0.69.3
+    react-native: 0.69.4
     react-native-gesture-handler: ^2.5.0
-    react-native-paper: ^5.0.0-rc.3
+    react-native-paper: ^5.0.0-rc.4
     react-native-qrcode-svg: ^6.1.2
     react-native-reanimated: ^2.9.1
     react-native-safe-area-context: ^4.3.1
     react-native-screens: ^3.15.0
-    react-native-svg: ^12.4.3
+    react-native-svg: ^12.4.4
     react-native-vector-icons: ^9.2.0
-    react-native-vision-camera: ^2.14.0
+    react-native-vision-camera: ^2.14.1
     react-test-renderer: 18.0.0
     reflect-metadata: ^0.1.13
     typescript: ^4.4.4
@@ -5792,12 +5800,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^21.8.16":
-  version: 21.8.16
-  resolution: "i18next@npm:21.8.16"
+"i18next@npm:^21.9.0":
+  version: 21.9.0
+  resolution: "i18next@npm:21.9.0"
   dependencies:
     "@babel/runtime": ^7.17.2
-  checksum: b29d0cfd3e69edb01ba55fac7f642cde921a47880bfb0552756dffdd2aaa866da17ae0825e47b6972b2c1249aa22a6e9f8813ce18a5072975a0dc720c408a4e5
+  checksum: b3d2f06cdecefd8e7d25a5961f6a6d26e7fb08aeb35c9cb548d08fd8acf809ec977052a1ba3a01a2da63cff6c8484829c26aa3ff627a803f8f2d5a38de923469
   languageName: node
   linkType: hard
 
@@ -9069,9 +9077,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-paper@npm:^5.0.0-rc.3":
-  version: 5.0.0-rc.3
-  resolution: "react-native-paper@npm:5.0.0-rc.3"
+"react-native-paper@npm:^5.0.0-rc.4":
+  version: 5.0.0-rc.4
+  resolution: "react-native-paper@npm:5.0.0-rc.4"
   dependencies:
     "@callstack/react-theme-provider": ^3.0.7
     color: ^3.1.2
@@ -9080,7 +9088,7 @@ __metadata:
     react: "*"
     react-native: "*"
     react-native-vector-icons: "*"
-  checksum: 3d7e13f6939e0b341584c1bbcc84f4e4e21b9aa6bb371403cbedd095c9e6b54f6bb3e8c6b6ee268b4908c89aec994c4744e15be62af3c3eb8c111438fe8c92db
+  checksum: d634d3ee37007e593d2d7c75918e4d80fe877c5671c4302778412092e2051b7f0505c0251a5cc7cc910fe6c3462853b285a46c4e3e08ca1bad5030d255668d03
   languageName: node
   linkType: hard
 
@@ -9141,16 +9149,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-svg@npm:^12.4.3":
-  version: 12.4.3
-  resolution: "react-native-svg@npm:12.4.3"
+"react-native-svg@npm:^12.4.4":
+  version: 12.4.4
+  resolution: "react-native-svg@npm:12.4.4"
   dependencies:
     css-select: ^5.1.0
     css-tree: ^1.1.3
   peerDependencies:
     react: "*"
     react-native: ">=0.50.0"
-  checksum: 2dd74bf377ebac3e08dadc6016f7b827d59e1066a62d00d476ae40665988149f08cf7b6e673ea433bd7677f1bc1a454bd33f6bf8e2bc2758aeec830fc1dadc03
+  checksum: a98d9180dc3434e9993b5028e351c2aa5004fa3b1f5131e5f263fd43a95a43d330f0d435bc7ea498784bdbfcf6ece0e777cdd2bb568cd1337c30623a5aa02fd7
   languageName: node
   linkType: hard
 
@@ -9167,24 +9175,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-vision-camera@npm:^2.14.0":
-  version: 2.14.0
-  resolution: "react-native-vision-camera@npm:2.14.0"
+"react-native-vision-camera@npm:^2.14.1":
+  version: 2.14.1
+  resolution: "react-native-vision-camera@npm:2.14.1"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: b1efa53cee564658a6d27ef17c689124be4f745f1e0a5448d752ee0a387e9402ddc12203e778a1ef9fdac487eee08763a8478c1baa8b1f4ece28ee81a8073ef8
+  checksum: 813b250a5adc38e38588b2a060ef2f93cbfaf90b9d3b946ffe8e0955143c6384e1a0b529d0f9a80aeb88def8918d3144d8ecea4ba169926dd7a8c1be01cc3dd8
   languageName: node
   linkType: hard
 
-"react-native@npm:0.69.3":
-  version: 0.69.3
-  resolution: "react-native@npm:0.69.3"
+"react-native@npm:0.69.4":
+  version: 0.69.4
+  resolution: "react-native@npm:0.69.4"
   dependencies:
     "@jest/create-cache-key-function": ^27.0.1
-    "@react-native-community/cli": ^8.0.3
-    "@react-native-community/cli-platform-android": ^8.0.2
-    "@react-native-community/cli-platform-ios": ^8.0.2
+    "@react-native-community/cli": ^8.0.4
+    "@react-native-community/cli-platform-android": ^8.0.4
+    "@react-native-community/cli-platform-ios": ^8.0.4
     "@react-native/assets": 1.0.0
     "@react-native/normalize-color": 2.0.0
     "@react-native/polyfills": 2.0.0
@@ -9218,7 +9226,7 @@ __metadata:
     react: 18.0.0
   bin:
     react-native: cli.js
-  checksum: 49153ee9ec7bec8d181f98c5ba2d4dbd2d9a7fd53ff3a45108290651af4df19db972619c12db1b7e2d98b19f30ada59f3811951ef5cc78348e03ef9145c03dea
+  checksum: dcc520f9aebf709b2fd5e4b4b73136347d7d99d8bdcd10f9b1bfd57ffa1e31e3acdccf22ff7ad7395ec6f74d941bdd1a43954cad2121cc9c0d29ca800bc506fe
   languageName: node
   linkType: hard
 

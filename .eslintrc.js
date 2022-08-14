@@ -10,6 +10,7 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx'],
       rules: {
+        'indent': ['error', 2],
         'object-curly-spacing': 'off',
         '@typescript-eslint/object-curly-spacing': ['error', 'always'],
         'semi': 'off',
