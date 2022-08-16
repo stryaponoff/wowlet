@@ -1,4 +1,4 @@
-import CameraServiceInterface from '@/services/camera/CameraServiceInterface'
+import type CameraServiceInterface from '@/services/camera/CameraServiceInterface'
 import { Camera } from 'react-native-vision-camera'
 import { injectable } from 'inversify'
 

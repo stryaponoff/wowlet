@@ -9,30 +9,33 @@ import BaseContentWrapper from '@/components/screens/BaseContentWrapper'
 import { observer } from 'mobx-react'
 import CardList from '@/components/cards/cardList'
 import { BarcodeScreenName } from '@/screens/BarcodeScreen'
+import type { BaseRepositoryInterface } from '@/services/store/BaseRepositoryInterface'
+import type Card from '@/entities/Card'
+import { useInjection } from 'inversify-react'
+import { Services } from '@/ioc/services'
+import type { RecordFieldType } from '@/utils/types/RecordFieldType'
 
 export const HomeScreenName = 'HomeScreen' as const
 type HomeScreenProps = StackScreenProps<MainNavigatorParamList, typeof HomeScreenName>
 
 export const HomeScreen: React.FC<HomeScreenProps> = observer(({ navigation }) => {
+  const cardStore = useInjection<BaseRepositoryInterface<Card>>(Services.CardStore)
+
   const navigateToScanScreen = () => {
     navigation.navigate(ScanScreenName)
   }
 
-  const navigateToBarcodeScreen = () => {
-    navigation.navigate(BarcodeScreenName, {
-      barcode: {
-        code: '4606224105550',
-        format: 'EAN13',
-      },
-    })
+  const navigateToBarcodeScreen = (cardId: RecordFieldType<Card, 'id'>) => {
+    navigation.navigate(BarcodeScreenName, { cardId })
   }
 
   return (
     <BaseScreenWrapper>
       <BaseContentWrapper>
         <CardList
+          data={cardStore.getAll()}
           style={{ flexGrow: 1 }}
-          onPress={navigateToBarcodeScreen}
+          onPress={cardId => navigateToBarcodeScreen(cardId)}
           numColumns={2}
         />
       </BaseContentWrapper>

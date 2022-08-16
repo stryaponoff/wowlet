@@ -1,52 +1,22 @@
 import React from 'react'
 import type { StyleProp, ViewStyle } from 'react-native'
 import { FlatList } from 'react-native'
-import Card from '@/components/cards/card'
-import type { CardData } from '@/services/domain/card/types'
+import CardComponent from '@/components/cards/card'
 import CardWrapper from '@/components/cards/cardWrapper'
-
-export const CardDataMock: CardData[] = [
-  {
-    name: 'Магнит',
-    colorPrimary: '#d4301f',
-    colorSecondary: '#fff',
-  },
-  {
-    name: 'Триал спорт Триал спорт Триал спорт Триал спорт',
-    colorPrimary: '#f1d448',
-    colorSecondary: '#243076',
-  },
-  {
-    name: 'Пятёрочка',
-    colorPrimary: '#499950',
-    colorSecondary: '#fff',
-  },
-  {
-    name: 'Пятёрочка',
-    colorPrimary: '#499950',
-    colorSecondary: '#fff',
-  },
-  {
-    name: 'Пятёрочка',
-    colorPrimary: '#499950',
-    colorSecondary: '#fff',
-  },
-  {
-    name: 'Пятёрочка',
-    colorPrimary: '#499950',
-    colorSecondary: '#fff',
-  },
-]
+import type Card from '@/entities/Card'
+import type { RecordFieldType } from '@/utils/types/RecordFieldType'
 
 export type CardListProps = {
+  data: Card[],
   style: StyleProp<ViewStyle>,
-  onPress?: () => void, // TODO: Add card to payload
+  onPress?: (cardId: RecordFieldType<Card, 'id'>) => void,
   numColumns?: number,
 }
 
 const NUM_COLUMNS_DEFAULT = 2
 
 const CardList: React.FC<CardListProps> = ({
+  data,
   style,
   onPress,
   numColumns = NUM_COLUMNS_DEFAULT,
@@ -55,14 +25,15 @@ const CardList: React.FC<CardListProps> = ({
     <FlatList
       key={`list-${numColumns}-columns`}
       style={style}
-      data={CardDataMock}
+      data={data}
       keyExtractor={item => item.name}
-      renderItem={({ item, index }) =>
-        (
-          <CardWrapper index={index} numColumns={numColumns} totalItems={CardDataMock.length}>
-            <Card data={item} onPress={onPress} />
+      renderItem={({ item, index }) => {
+        return (
+          <CardWrapper index={index} numColumns={numColumns} totalItems={data.length}>
+            <CardComponent data={item} onPress={() => onPress ? onPress(item.id) : {}} />
           </CardWrapper>
-        )}
+        )
+      }}
       numColumns={numColumns}
     />
   )

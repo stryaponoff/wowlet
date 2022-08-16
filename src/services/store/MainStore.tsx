@@ -11,19 +11,16 @@ import { Appearance } from 'react-native'
 @injectable()
 export class MainStore {
   public language: Language
-
   public setLanguage = action((value: Language): void => {
     this.language = value
   })
 
   public systemThemeType: ThemeType = Appearance.getColorScheme() ?? 'light'
-
   public setSystemThemeType = action((value: ThemeType): void => {
     this.systemThemeType = value
   })
 
   public preferredThemeType: ThemeTypeWithAuto = 'auto'
-
   public setPreferredThemeType = action((value: ThemeTypeWithAuto): void => {
     this.preferredThemeType = value
   })

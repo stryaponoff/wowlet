@@ -2478,6 +2478,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/luxon@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@types/luxon@npm:3.0.0"
+  checksum: 7738d3f4b91097a8139eca966ab53c6b40bb417b2cc2014c3bbd0aee033d6ff54af14c62046c2eb042434923b6bf796874f24b2af90e07ef422e6d841463d4b2
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*":
   version: 18.6.2
   resolution: "@types/node@npm:18.6.2"
@@ -2817,6 +2824,7 @@ __metadata:
     "@react-navigation/stack": ^6.2.2
     "@tsconfig/react-native": ^2.0.2
     "@types/jest": ^26.0.23
+    "@types/luxon": ^3.0.0
     "@types/react-native": ^0.69.5
     "@types/react-native-vector-icons": ^6.4.11
     "@types/react-test-renderer": ^18.0.0
@@ -2827,17 +2835,18 @@ __metadata:
     babel-plugin-transform-typescript-metadata: ^0.3.2
     deepmerge: ^4.2.2
     eslint: ^7.32.0
-    i18next: ^21.9.0
+    i18next: ^21.9.1
     intl-pluralrules: ^1.3.1
     inversify: ^6.0.1
     inversify-react: ^1.0.2
     jest: ^26.6.3
+    luxon: ^3.0.1
     metro-react-native-babel-preset: ^0.70.3
     mobx: ^6.6.1
     mobx-persist-store: ^1.0.6
     mobx-react: ^7.5.2
     react: 18.0.0
-    react-i18next: ^11.18.3
+    react-i18next: ^11.18.4
     react-native: 0.69.4
     react-native-gesture-handler: ^2.5.0
     react-native-paper: ^5.0.0-rc.4
@@ -2846,6 +2855,7 @@ __metadata:
     react-native-safe-area-context: ^4.3.1
     react-native-screens: ^3.15.0
     react-native-svg: ^12.4.4
+    react-native-uuid: ^2.0.1
     react-native-vector-icons: ^9.2.0
     react-native-vision-camera: ^2.14.1
     react-test-renderer: 18.0.0
@@ -5800,12 +5810,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^21.9.0":
-  version: 21.9.0
-  resolution: "i18next@npm:21.9.0"
+"i18next@npm:^21.9.1":
+  version: 21.9.1
+  resolution: "i18next@npm:21.9.1"
   dependencies:
     "@babel/runtime": ^7.17.2
-  checksum: b3d2f06cdecefd8e7d25a5961f6a6d26e7fb08aeb35c9cb548d08fd8acf809ec977052a1ba3a01a2da63cff6c8484829c26aa3ff627a803f8f2d5a38de923469
+  checksum: 1bc59c61fbb27385841f76436c7dd60e9f42a3fb326797db44a65dd165c489420e549b5370e3de75b85f8d61239f4869fc9fbcf63deae5f40ee606bc04916e6d
   languageName: node
   linkType: hard
 
@@ -7446,6 +7456,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"luxon@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "luxon@npm:3.0.1"
+  checksum: aa966eb919bf95b1bd819cda784d1f6f66e3fb65bd9ec7bf68b6a978eeb4e3e14f7e2275021b473f93b15b6b7ba2e5a30471e53add3929a7e695fcfd6dd40ec8
+  languageName: node
+  linkType: hard
+
 "make-dir@npm:^2.0.0, make-dir@npm:^2.1.0":
   version: 2.1.0
   resolution: "make-dir@npm:2.1.0"
@@ -8994,9 +9011,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^11.18.3":
-  version: 11.18.3
-  resolution: "react-i18next@npm:11.18.3"
+"react-i18next@npm:^11.18.4":
+  version: 11.18.4
+  resolution: "react-i18next@npm:11.18.4"
   dependencies:
     "@babel/runtime": ^7.14.5
     html-parse-stringify: ^3.0.1
@@ -9008,7 +9025,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 05fe3187dd092000c9f24dfd0cad2bd433f9a88a78cec2b43d74545ea1ec014f2b4e2ac84c579480be15bc571ef7fb2a2fafbe0bfac02f80ce10a8ffc6ad91e7
+  checksum: c64546e22447410cb09020156d86a35cc672f5e34899155456068a7caedfb70dacd70e3619e671ebc831b11d0ca95c1de1c56897842fd1de401a87b86d040beb
   languageName: node
   linkType: hard
 
@@ -9159,6 +9176,13 @@ __metadata:
     react: "*"
     react-native: ">=0.50.0"
   checksum: a98d9180dc3434e9993b5028e351c2aa5004fa3b1f5131e5f263fd43a95a43d330f0d435bc7ea498784bdbfcf6ece0e777cdd2bb568cd1337c30623a5aa02fd7
+  languageName: node
+  linkType: hard
+
+"react-native-uuid@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "react-native-uuid@npm:2.0.1"
+  checksum: 2fae6e2ee6cef108a31ae9d5be661a1947a86f4c6a812c7386b57d970861b364dc887bc4fe3225227aeea7925ccdc24d4478ff30193305abc283eb4a30ee2138
   languageName: node
   linkType: hard
 

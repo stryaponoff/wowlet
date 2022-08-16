@@ -6,16 +6,10 @@ import { useInjection } from 'inversify-react'
 import { Services } from '@/ioc/services'
 import { observer } from 'mobx-react'
 
-const BaseScreenWrapperWithStore: React.FC<PropsWithChildren<{ mainStore: MainStore }>> = observer(
-  (
-    {
-      mainStore: {
-        statusBarColor,
-        statusBarStyle,
-      },
-      children,
-    }
-  ) => {
+const BaseScreenWrapper: React.FC<PropsWithChildren> = observer(
+  ({ children }) => {
+    const { statusBarStyle, statusBarColor } = useInjection<MainStore>(Services.MainStore)
+
     return (
       <View style={{ flexGrow: 1 }}>
         <StatusBar
@@ -37,14 +31,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 })
-
-const BaseScreenWrapper: React.FC<PropsWithChildren> = ({ children }) => {
-  const mainStore = useInjection<MainStore>(Services.MainStore)
-  return (
-    <BaseScreenWrapperWithStore mainStore={mainStore}>
-      {children}
-    </BaseScreenWrapperWithStore>
-  )
-}
 
 export default BaseScreenWrapper

@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import type { LayoutChangeEvent } from 'react-native'
 import { StyleSheet, View } from 'react-native'
-import type { CardData } from '@/services/domain/card/types'
+import type Card from '@/entities/Card'
 import { Avatar, Text, TouchableRipple } from 'react-native-paper'
 
 export type CardProps = {
-  data: CardData,
+  data: Card,
   onPress?: () => void,
 }
 
-const Card: React.FC<CardProps> = ({ data, onPress }) => {
+const CardComponent: React.FC<CardProps> = ({ data, onPress }) => {
   const [avatarSize, setAvatarSize] = useState(32)
 
   const calculateAvatarSize = (event: LayoutChangeEvent) => {
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Card
+export default CardComponent

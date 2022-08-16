@@ -1,6 +1,7 @@
-import { Barcode as VisionCameraBarcode, BarcodeFormat as VisionCameraBarcodeFormat } from 'vision-camera-code-scanner'
-import { Barcode, BARCODE_FORMAT_MAP, BarcodeFormat } from '@/services/barcode/types'
-import BarcodeServiceInterface from '@/services/barcode/BarcodeServiceInterface'
+import type  { Barcode as VisionCameraBarcode, BarcodeFormat as VisionCameraBarcodeFormat } from 'vision-camera-code-scanner'
+import type { Barcode, BarcodeFormat } from '@/services/barcode/types'
+import { BARCODE_FORMAT_MAP } from '@/services/barcode/types'
+import type BarcodeServiceInterface from '@/services/barcode/BarcodeServiceInterface'
 import { injectable } from 'inversify'
 
 @injectable()

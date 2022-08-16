@@ -10,6 +10,8 @@ import { BarcodeScreenName } from '@/screens/BarcodeScreen'
 import { BarcodeScreen } from '@/screens/BarcodeScreen'
 import { HomeScreenThreeDotButton } from '@/components/screens/HomeScreen/HomeScreenThreeDotButton'
 import { HomeScreenSortButton } from '@/components/screens/HomeScreen/HomeScreenSortButton'
+import type Card from '@/entities/Card'
+import type { RecordFieldType } from '@/utils/types/RecordFieldType'
 
 export type MainNavigatorParamList = {
   [HomeScreenName]: undefined
@@ -18,7 +20,7 @@ export type MainNavigatorParamList = {
     barcode: Barcode
   },
   [BarcodeScreenName]: {
-    barcode: Barcode
+    cardId: RecordFieldType<Card, 'id'>
   }
 }
 
@@ -32,7 +34,7 @@ const MainNavigator: React.FC = () => {
       initialRouteName={HomeScreenName}
       screenOptions={{
         header: ({ navigation, options }) => (
-          <Appbar.Header>
+          <Appbar.Header mode="center-aligned">
             {navigation.canGoBack() && <Appbar.BackAction onPress={() => navigation.goBack()} />}
             <Appbar.Content title={options.title} />
             {options.headerRight && (
@@ -47,16 +49,22 @@ const MainNavigator: React.FC = () => {
         component={HomeScreen}
         options={{
           title: t('HomeScreen.title'),
-          headerRight: () => (
-            <>
+          header: ({ options }) => (
+            <Appbar.Header mode="large">
+              <Appbar.Content title={options.title} />
+
               <HomeScreenSortButton />
               <HomeScreenThreeDotButton />
-            </>
+            </Appbar.Header>
           ),
         }}
       />
 
-      <Stack.Screen name={BarcodeScreenName} component={BarcodeScreen} options={{ title: '%card_name%' }} />
+      <Stack.Screen
+        name={BarcodeScreenName}
+        component={BarcodeScreen}
+      />
+
       <Stack.Screen name={ScanScreenName} component={ScanScreen} />
       <Stack.Screen name={ScanResultScreenName} component={ScanResultScreen} />
     </Stack.Navigator>
