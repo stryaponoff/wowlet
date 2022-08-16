@@ -1,5 +1,10 @@
 {
   "HomeScreen": {
-    "title": "My cards"
+    "title": "My cards",
+    "header": {
+      "threeDotMenu": {
+        "settingsButton": "Settings"
+      }
+    }
   }
 }
