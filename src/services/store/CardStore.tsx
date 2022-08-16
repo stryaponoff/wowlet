@@ -6,6 +6,8 @@ import EntityAlreadyExistsError from '@/errors/EntityAlreadyExistsError'
 import EntityDoesNotExistError from '@/errors/EntityDoesNotExistError'
 import deepmerge from 'deepmerge'
 import type Card from '@/entities/Card'
+import type { SortBy, SortDirection } from '@/utils/types/sort'
+import AbsurdError from '@/errors/absurdError'
 
 @injectable()
 export class CardStore implements BaseRepositoryInterface<Card> {
@@ -48,6 +50,9 @@ export class CardStore implements BaseRepositoryInterface<Card> {
     },
   }
 
+  public sortDirection: SortDirection = 'desc'
+  public sortBy: SortBy = 'name'
+
   public insert = action((id: string, entity: Card): void => {
     if (id in this.entities) {
       throw new EntityAlreadyExistsError(id)
@@ -81,7 +86,7 @@ export class CardStore implements BaseRepositoryInterface<Card> {
   })
 
   public getAll = ((): Card[] => {
-    return Object.values(this.entities)
+    return Object.values(this.entities).sort(this.getSorter())
   })
 
   public get = action((id: string): Card => {
@@ -93,6 +98,45 @@ export class CardStore implements BaseRepositoryInterface<Card> {
 
     return entity
   })
+
+  public setSortDirection = action((direction: SortDirection) => {
+    this.sortDirection = direction
+  })
+
+  public setSortBy = action((sortBy: SortBy) => {
+    this.sortBy = sortBy
+  })
+
+  private getSorter(): (a: Card, b: Card) => number {
+    const nameSorter = (a: Card, b: Card) => {
+      const ascResult = a.name.localeCompare(b.name)
+      if (ascResult === 0) {
+        return ascResult
+      }
+
+      if (this.sortDirection === 'asc') {
+        return ascResult
+      } else {
+        return -ascResult
+      }
+    }
+
+    const createdAtSorter = (a: Card, b: Card) => {
+      if  (this.sortDirection === 'asc') {
+        return a < b ? 1 : -1
+      } else {
+        return a > b ? 1 : -1
+      }
+    }
+
+    if (this.sortBy === 'name') {
+      return nameSorter
+    } else if (this.sortBy === 'createdAt') {
+      return createdAtSorter
+    } else {
+      throw new AbsurdError(this.sortBy)
+    }
+  }
 
   constructor() {
     makeAutoObservable(this)

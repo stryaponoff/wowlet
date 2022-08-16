@@ -14,8 +14,6 @@ import type LanguageServiceInterface from '@/services/language/LanguageServiceIn
 import LanguageService from '@/services/language/LanguageService'
 
 import { MainStore } from '@/services/store/MainStore'
-import type { BaseRepositoryInterface } from '@/services/store/BaseRepositoryInterface'
-import type Card from '@/entities/Card'
 import { CardStore } from '@/services/store/CardStore'
 
 const container = new Container()
@@ -25,6 +23,6 @@ container.bind<CameraServiceInterface>(Services.CameraService).to(CameraService)
 container.bind<BarcodeServiceInterface>(Services.BarcodeService).to(BarcodeService).inSingletonScope()
 container.bind<ThemeServiceInterface>(Services.ThemeService).to(ThemeService).inSingletonScope()
 container.bind<MainStore>(Services.MainStore).to(MainStore).inSingletonScope()
-container.bind<BaseRepositoryInterface<Card>>(Services.CardStore).to(CardStore).inSingletonScope()
+container.bind<CardStore>(Services.CardStore).to(CardStore).inSingletonScope()
 
 export default container

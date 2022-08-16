@@ -14,12 +14,13 @@ import type Card from '@/entities/Card'
 import { useInjection } from 'inversify-react'
 import { Services } from '@/ioc/services'
 import type { RecordFieldType } from '@/utils/types/RecordFieldType'
+import type { CardStore } from '@/services/store/CardStore'
 
 export const HomeScreenName = 'HomeScreen' as const
 type HomeScreenProps = StackScreenProps<MainNavigatorParamList, typeof HomeScreenName>
 
 export const HomeScreen: React.FC<HomeScreenProps> = observer(({ navigation }) => {
-  const cardStore = useInjection<BaseRepositoryInterface<Card>>(Services.CardStore)
+  const cardStore = useInjection<CardStore>(Services.CardStore)
 
   const navigateToScanScreen = () => {
     navigation.navigate(ScanScreenName)

@@ -12,12 +12,13 @@ import { useInjection } from 'inversify-react'
 import type { BaseRepositoryInterface } from '@/services/store/BaseRepositoryInterface'
 import type Card from '@/entities/Card'
 import { Services } from '@/ioc/services'
+import type { CardStore } from '@/services/store/CardStore'
 
 export const BarcodeScreenName = 'BarcodeScreen' as const
 type BarcodeScreenProps = StackScreenProps<MainNavigatorParamList, typeof BarcodeScreenName>
 
 export const BarcodeScreen: React.FC<BarcodeScreenProps> = observer(({ navigation, route }) => {
-  const cardStore = useInjection<BaseRepositoryInterface<Card>>(Services.CardStore)
+  const cardStore = useInjection<CardStore>(Services.CardStore)
   const card = cardStore.get(route.params.cardId)
 
   useLayoutEffect(() => {

@@ -1,4 +1,10 @@
 {
+  "sort": {
+    "sortBy": {
+      "name": "Name",
+      "createdAt": "Date"
+    }
+  },
   "HomeScreen": {
     "title": "My cards",
     "header": {
