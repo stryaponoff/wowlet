@@ -5,6 +5,8 @@ const Services = {
   BarcodeService: Symbol(),
   MainStore: Symbol(),
   CardStore: Symbol(),
+  SettingsService: Symbol(),
+  SettingsRepository: Symbol(),
 }
 
 export { Services }

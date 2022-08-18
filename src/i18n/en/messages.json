@@ -12,5 +12,14 @@
         "settingsButton": "Settings"
       }
     }
+  },
+  "SettingsScreen": {
+    "title": "Settings",
+    "appearance": {
+      "title": "Appearance",
+      "dark": "Dark",
+      "light": "Light",
+      "auto": "Auto"
+    }
   }
 }

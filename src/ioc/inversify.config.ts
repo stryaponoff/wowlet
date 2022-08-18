@@ -16,6 +16,10 @@ import LanguageService from '@/services/language/LanguageService'
 import { MainStore } from '@/services/store/MainStore'
 import { CardStore } from '@/services/store/CardStore'
 
+import SettingsRepository from '@/repositories/SettingsRepository'
+import SettingsService from '@/services/settings/SettingsService'
+import type SettingsServiceInterface from '@/services/settings/SettingsServiceInterface'
+
 const container = new Container()
 
 container.bind<LanguageServiceInterface>(Services.LanguageService).to(LanguageService).inSingletonScope()
@@ -24,5 +28,7 @@ container.bind<BarcodeServiceInterface>(Services.BarcodeService).to(BarcodeServi
 container.bind<ThemeServiceInterface>(Services.ThemeService).to(ThemeService).inSingletonScope()
 container.bind<MainStore>(Services.MainStore).to(MainStore).inSingletonScope()
 container.bind<CardStore>(Services.CardStore).to(CardStore).inSingletonScope()
+container.bind<SettingsRepository>(Services.SettingsRepository).to(SettingsRepository).inSingletonScope()
+container.bind<SettingsServiceInterface>(Services.SettingsService).to(SettingsService).inSingletonScope()
 
 export default container

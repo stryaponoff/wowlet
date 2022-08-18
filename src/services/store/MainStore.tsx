@@ -7,6 +7,7 @@ import type { Theme, ThemeType, ThemeTypeWithAuto } from '@/services/theme/types
 import type ThemeService from '@/services/theme/ThemeService'
 import type { ColorValue, StatusBarStyle } from 'react-native'
 import { Appearance } from 'react-native'
+import type SettingsServiceInterface from '@/services/settings/SettingsServiceInterface'
 
 @injectable()
 export class MainStore {
@@ -20,7 +21,7 @@ export class MainStore {
     this.systemThemeType = value
   })
 
-  public preferredThemeType: ThemeTypeWithAuto = 'auto'
+  public preferredThemeType: ThemeTypeWithAuto
   public setPreferredThemeType = action((value: ThemeTypeWithAuto): void => {
     this.preferredThemeType = value
   })
@@ -44,28 +45,24 @@ export class MainStore {
   constructor(
     @inject(Services.ThemeService) protected readonly themeService: ThemeService,
     @inject(Services.LanguageService) protected readonly languageService: LanguageService,
+    @inject(Services.SettingsService) protected readonly settingsService: SettingsServiceInterface
   ) {
-    this.language = languageService.getDefaultLanguage()
-
     Appearance.addChangeListener(({ colorScheme }) => {
       if (colorScheme) {
         this.setSystemThemeType(colorScheme)
       }
     })
 
-    reaction(
-      () => this.language,
-      value => {
-        this.languageService.changeLanguage(value)
-      },
-    )
+    this.language = languageService.getDefaultLanguage()
+    this.preferredThemeType = this.settingsService.getPreferredTheme()
 
     makeAutoObservable(this)
-    // makePersistable(this, {
-    //   name: 'main',
-    //   properties: ['language', '_configuredDevices'],
-    //   storage: AsyncStorage,
-    //   debugMode: __DEV__,
-    // })
+    // reaction(
+    //   () => this.language,
+    //   value => {
+    //     this.languageService.changeLanguage(value)
+    //   },
+    // )
+
   }
 }

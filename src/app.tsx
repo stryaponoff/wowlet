@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import { createNavigationContainerRef } from '@react-navigation/core'
 import type { MainNavigatorParamList } from '@/navigation/MainNavigator'
 import MainNavigator from '@/navigation/MainNavigator'
@@ -11,6 +11,8 @@ import type { MainStore } from '@/services/store/MainStore'
 import { useInjection } from 'inversify-react'
 import { Services } from '@/ioc/services'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { reaction } from 'mobx'
+import type SettingsServiceInterface from '@/services/settings/SettingsServiceInterface'
 
 export const navigationRef = createNavigationContainerRef<MainNavigatorParamList>()
 
@@ -28,6 +30,16 @@ const Content: React.FC<{ store: MainStore }> = observer(({ store }) => (
 
 export default () => {
   const mainStore = useInjection<MainStore>(Services.MainStore)
+  const settingsService = useInjection<SettingsServiceInterface>(Services.SettingsService)
+
+  useLayoutEffect(() => {
+    reaction(
+      () => mainStore.preferredThemeType,
+      value => {
+        settingsService.setPreferredTheme(value)
+      }
+    )
+  }, [])
 
   const { isInit: isLanguageServerInit } = useLanguageService()
   if (!isLanguageServerInit) {

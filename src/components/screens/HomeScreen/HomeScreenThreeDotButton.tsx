@@ -1,8 +1,13 @@
 import React from 'react'
 import { Appbar, Menu } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
+import { SettingsScreenName } from '@/screens/SettingsScreen'
+import type { StackScreenProps } from '@react-navigation/stack'
+import type { MainNavigatorParamList } from '@/navigation/MainNavigator'
 
-export const HomeScreenThreeDotButton: React.FC = () => {
+type HomeScreenThreeDotButtonProps = StackScreenProps<MainNavigatorParamList, 'HomeScreen'>
+
+export const HomeScreenThreeDotButton: React.FC<HomeScreenThreeDotButtonProps> = ({ navigation }) => {
   const { t } = useTranslation()
 
   const [visible, setVisible] = React.useState(false)
@@ -11,7 +16,7 @@ export const HomeScreenThreeDotButton: React.FC = () => {
 
   const settingsPressHandler = () => {
     closeMenu()
-    // TODO: Add navigation
+    navigation.navigate(SettingsScreenName)
   }
 
   return (

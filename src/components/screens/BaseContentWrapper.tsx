@@ -1,9 +1,23 @@
-import React, { PropsWithChildren } from 'react'
+import React from 'react'
+import type { PropsWithChildren } from 'react'
 import { StyleSheet, View } from 'react-native'
 
-const BaseContentWrapper: React.FC<PropsWithChildren> = ({ children }) => {
+type BaseContentWrapperProps = {
+  noHorizontalPadding?: boolean,
+  noVerticalPadding?: boolean,
+}
+
+const BaseContentWrapper: React.FC<PropsWithChildren<BaseContentWrapperProps>> = ({
+  noHorizontalPadding,
+  noVerticalPadding,
+  children,
+}) => {
   return (
-    <View style={styles.container}>
+    <View style={[
+      styles.container,
+      noHorizontalPadding ? null : styles.horizontalPadding,
+      noVerticalPadding ? null : styles.verticalPadding,
+    ]}>
       {children}
     </View>
   )
@@ -12,7 +26,12 @@ const BaseContentWrapper: React.FC<PropsWithChildren> = ({ children }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 8,
+  },
+  horizontalPadding: {
+    paddingHorizontal: 8,
+  },
+  verticalPadding: {
+    paddingVertical: 8,
   },
 })
 

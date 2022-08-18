@@ -2849,6 +2849,7 @@ __metadata:
     react-i18next: ^11.18.4
     react-native: 0.69.4
     react-native-gesture-handler: ^2.5.0
+    react-native-mmkv-storage: ^0.8.0
     react-native-paper: ^5.0.0-rc.4
     react-native-qrcode-svg: ^6.1.2
     react-native-reanimated: ^2.9.1
@@ -9091,6 +9092,17 @@ __metadata:
   peerDependencies:
     react-native: ">=0.42.0"
   checksum: 024376646009a966e33e12fc2358751830818b0fb73b1c601a64eb5e490d2dc43eec23668991b985a8c412a84d087f20eb45bb9b593567c08b66e741b7bddda5
+  languageName: node
+  linkType: hard
+
+"react-native-mmkv-storage@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "react-native-mmkv-storage@npm:0.8.0"
+  peerDependencies:
+    react-native: "*"
+  bin:
+    mmkv-link: autolink/postlink/run.js
+  checksum: 16f66c93e5e52d92b8884885e52a48fb97215fb05f9d5254c5a375045f19674bd224821410783514f914036c5e7c701893cfb54455c8e9f3df6d83cd3709182d
   languageName: node
   linkType: hard
 

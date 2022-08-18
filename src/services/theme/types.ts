@@ -3,5 +3,10 @@ import type { Theme as NavigationTheme } from '@react-navigation/native/lib/type
 
 export type Theme = PaperTheme & NavigationTheme
 
-export type ThemeType = 'dark' | 'light'
+const themeTypes = ['dark', 'light'] as const
+export type ThemeType = typeof themeTypes[number]
+export const isThemeType = (value: unknown): value is ThemeType => {
+  return themeTypes.some(i => i === value)
+}
+
 export type ThemeTypeWithAuto = ThemeType | 'auto'
