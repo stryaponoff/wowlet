@@ -29,6 +29,7 @@ module.exports = {
           },
         }],
         '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
+        'react-hooks/exhaustive-deps': 'off',
       },
     },
   ],

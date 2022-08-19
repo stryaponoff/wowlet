@@ -2852,6 +2852,7 @@ __metadata:
     react-native-gesture-handler: ^2.5.0
     react-native-mmkv-storage: ^0.8.0
     react-native-paper: ^5.0.0-rc.4
+    react-native-paper-dropdown: ^1.0.7
     react-native-qrcode-svg: ^6.1.2
     react-native-reanimated: ^2.9.1
     react-native-safe-area-context: ^4.3.1
@@ -9116,6 +9117,20 @@ __metadata:
   bin:
     mmkv-link: autolink/postlink/run.js
   checksum: 16f66c93e5e52d92b8884885e52a48fb97215fb05f9d5254c5a375045f19674bd224821410783514f914036c5e7c701893cfb54455c8e9f3df6d83cd3709182d
+  languageName: node
+  linkType: hard
+
+"react-native-paper-dropdown@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "react-native-paper-dropdown@npm:1.0.7"
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-native": "*"
+    react: "*"
+    react-native: "*"
+    react-native-paper: "*"
+    typescript: "*"
+  checksum: 1fbb89406f35f0cf4f1ffcc65ac595c2a38eb7081c8a02316ce2161cf167a1d80e11b8517c37b939281b8c1110e9af2dcc69d902936d69a8b6acfd9442d802fb
   languageName: node
   linkType: hard
 

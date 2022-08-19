@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import type { LayoutChangeEvent } from 'react-native'
 import { StyleSheet, View } from 'react-native'
 import type Card from '@/entities/Card'
-import { Avatar, Text, TouchableRipple } from 'react-native-paper'
+import { Avatar, Surface, Text, TouchableRipple } from 'react-native-paper'
 
 export type CardProps = {
   data: Card,
@@ -21,9 +21,10 @@ const CardComponent: React.FC<CardProps> = ({ data, onPress }) => {
 
   return (
     <View>
-      <View
+      <Surface
         style={[styles.cardWrapper, { backgroundColor: data.colorPrimary }]}
         onLayout={calculateAvatarSize}
+        elevation={2}
       >
         <View>
           <Avatar.Text
@@ -40,7 +41,7 @@ const CardComponent: React.FC<CardProps> = ({ data, onPress }) => {
         >
           <View />
         </TouchableRipple>
-      </View>
+      </Surface>
 
       <Text variant="titleSmall" style={styles.cardName} numberOfLines={1}>{data.name}</Text>
     </View>
@@ -53,7 +54,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 3,
     aspectRatio:  3.37 / 2.125, // bank card aspect ratio
   },
   cardName: {

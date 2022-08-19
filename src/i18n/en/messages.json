@@ -29,9 +29,54 @@
     }
   },
   "ScanScreen": {
-    "title": "Scan barcode"
+    "title": "Scan barcode",
+    "form": {
+      "submit": "Add card",
+      "sections": {
+        "scannedData": {
+          "header": "Barcode data"
+        },
+        "cardData": {
+          "header": "Card data"
+        },
+        "appearance": {
+          "header": "Appearance"
+        }
+      },
+      "fields": {
+        "codeValue": {
+          "label": "Code"
+        },
+        "codeFormat": {
+          "label": "Code format"
+        },
+        "cardName": {
+          "label": "Name",
+          "placeholder": "My favorite store"
+        },
+        "primaryColor": {
+          "label": "Primary color",
+          "placeholder": "#FF0000"
+        },
+        "secondaryColor": {
+          "label": "Secondary color",
+          "placeholder": "#FFFFFF"
+        }
+      }
+    }
   },
   "ScanResultScreen": {
     "title": "Add new card"
+  },
+  "barcodeFormat": {
+    "ITF": "ITF",
+    "CODE39":"CODE39",
+    "CODE128": "CODE128",
+    "EAN13":"EAN-13",
+    "EAN8": "EAN-8",
+    "UPC": "UPC-A",
+    "UPCE": "UPC-E",
+    "codabar":"Codabar",
+    "QR": "QR Code"
   }
 }

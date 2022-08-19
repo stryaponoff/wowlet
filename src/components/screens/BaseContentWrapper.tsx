@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   horizontalPadding: {
-    paddingHorizontal: 8,
+    paddingHorizontal: 16,
   },
   verticalPadding: {
-    paddingVertical: 8,
+    paddingVertical: 16,
   },
 })
 
