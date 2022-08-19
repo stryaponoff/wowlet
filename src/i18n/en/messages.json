@@ -11,6 +11,12 @@
       "threeDotMenu": {
         "settingsButton": "Settings"
       }
+    },
+    "cardList": {
+      "empty": {
+        "title": "Your wallet is empty",
+        "subtitle": "Press the <1></1> button at the bottom of the screen to add one"
+      }
     }
   },
   "SettingsScreen": {
