@@ -11,35 +11,12 @@ import type { MainStore } from '@/services/store/MainStore'
 import { useInjection } from 'inversify-react'
 import { Services } from '@/ioc/services'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { reaction } from 'mobx'
-import type SettingsServiceInterface from '@/services/settings/SettingsServiceInterface'
+import MainStoreReactionProvider from './components/reaction-providers/MainStoreReactionProvider'
 
 export const navigationRef = createNavigationContainerRef<MainNavigatorParamList>()
 
-const Content: React.FC<{ store: MainStore }> = observer(({ store }) => (
-  <PaperProvider theme={store.theme}>
-    <SafeAreaProvider>
-      <NavigationContainer ref={navigationRef} theme={store.theme}>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <MainNavigator />
-        </GestureHandlerRootView>
-      </NavigationContainer>
-    </SafeAreaProvider>
-  </PaperProvider>
-))
-
-export default () => {
+const App: React.FC = observer(() => {
   const mainStore = useInjection<MainStore>(Services.MainStore)
-  const settingsService = useInjection<SettingsServiceInterface>(Services.SettingsService)
-
-  useLayoutEffect(() => {
-    reaction(
-      () => mainStore.preferredThemeType,
-      value => {
-        settingsService.setPreferredTheme(value)
-      }
-    )
-  }, [])
 
   const { isInit: isLanguageServerInit } = useLanguageService()
   if (!isLanguageServerInit) {
@@ -47,6 +24,18 @@ export default () => {
   }
 
   return (
-    <Content store={mainStore} />
+    <PaperProvider theme={mainStore.theme}>
+      <SafeAreaProvider>
+        <NavigationContainer ref={navigationRef} theme={mainStore.theme}>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <MainStoreReactionProvider>
+              <MainNavigator />
+            </MainStoreReactionProvider>
+          </GestureHandlerRootView>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </PaperProvider>
   )
-}
+})
+
+export default App

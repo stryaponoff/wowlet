@@ -29,7 +29,6 @@ export default class SettingsRepository {
   }
 
   public setPreferredTheme(theme: ThemeTypeWithAuto) {
-    console.log('setPreferredTheme', theme)
     this.storage.setString(SettingsRepoKeys.PREFERRED_THEME, theme)
   }
 }

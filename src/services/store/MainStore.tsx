@@ -57,12 +57,5 @@ export class MainStore {
     this.preferredThemeType = this.settingsService.getPreferredTheme()
 
     makeAutoObservable(this)
-    // reaction(
-    //   () => this.language,
-    //   value => {
-    //     this.languageService.changeLanguage(value)
-    //   },
-    // )
-
   }
 }
