@@ -17,24 +17,19 @@ export const HomeScreenSortButton: React.FC = observer(() => {
   const openMenu = () => setVisible(true)
   const closeMenu = () => setVisible(false)
 
-  const isDesc = React.useMemo(() => cardStore.sortDirection === 'desc', [cardStore.sortDirection])
+  const isDesc = React.useMemo(() => cardStore.sorter.direction === 'desc', [cardStore.sorter.direction])
   const setIsDesc = (_isDesc: boolean) => {
     cardStore.setSortDirection(_isDesc ? 'desc' : 'asc')
   }
 
-  const isSortByName = React.useMemo(() => cardStore.sortBy === 'name', [cardStore.sortBy])
+  const isSortByName = React.useMemo(() => cardStore.sorter.sortBy === 'name', [cardStore.sorter.sortBy])
   const setSortByName = () => {
     cardStore.setSortBy('name')
   }
 
-  const isSortByCreatedAt = React.useMemo(() => cardStore.sortBy === 'createdAt', [cardStore.sortBy])
+  const isSortByCreatedAt = React.useMemo(() => cardStore.sorter.sortBy === 'createdAt', [cardStore.sorter.sortBy])
   const setSortByCreatedAt = () => {
     cardStore.setSortBy('createdAt')
-  }
-
-  const settingsPressHandler = () => {
-    closeMenu()
-    // TODO: Add navigation
   }
 
   return (

@@ -7,6 +7,8 @@ const Services = {
   CardStore: Symbol(),
   SettingsService: Symbol(),
   SettingsRepository: Symbol(),
+  CardService: Symbol(),
+  CardRepository: Symbol(),
 }
 
 export { Services }

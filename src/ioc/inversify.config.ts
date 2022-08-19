@@ -19,6 +19,9 @@ import { CardStore } from '@/services/store/CardStore'
 import SettingsRepository from '@/repositories/SettingsRepository'
 import SettingsService from '@/services/settings/SettingsService'
 import type SettingsServiceInterface from '@/services/settings/SettingsServiceInterface'
+import CardRepository from '@/repositories/CardRepository'
+import type CardServiceInterface from '@/services/card/CardServiceInterface'
+import CardService from '@/services/card/CardService'
 
 const container = new Container()
 
@@ -30,5 +33,7 @@ container.bind<MainStore>(Services.MainStore).to(MainStore).inSingletonScope()
 container.bind<CardStore>(Services.CardStore).to(CardStore).inSingletonScope()
 container.bind<SettingsRepository>(Services.SettingsRepository).to(SettingsRepository).inSingletonScope()
 container.bind<SettingsServiceInterface>(Services.SettingsService).to(SettingsService).inSingletonScope()
+container.bind<CardRepository>(Services.CardRepository).to(CardRepository).inSingletonScope()
+container.bind<CardServiceInterface>(Services.CardService).to(CardService).inSingletonScope()
 
 export default container

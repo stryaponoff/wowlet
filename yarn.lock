@@ -2848,6 +2848,7 @@ __metadata:
     react: 18.0.0
     react-i18next: ^11.18.4
     react-native: 0.69.4
+    react-native-flipper: ^0.161.0
     react-native-gesture-handler: ^2.5.0
     react-native-mmkv-storage: ^0.8.0
     react-native-paper: ^5.0.0-rc.4
@@ -2862,6 +2863,7 @@ __metadata:
     react-native-vision-camera: ^2.14.1
     react-test-renderer: 18.0.0
     reflect-metadata: ^0.1.13
+    rn-mmkv-storage-flipper: ^1.0.0
     typescript: ^4.4.4
     vision-camera-code-scanner: ^0.2.0
   languageName: unknown
@@ -9064,6 +9066,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-flipper@npm:^0.161.0":
+  version: 0.161.0
+  resolution: "react-native-flipper@npm:0.161.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-native: ">0.62.0"
+  checksum: 58cd70d72c70777541d0a088e2febc938c78233505f3770c78edf5c22fe0e13d9b8391eac6a8dc8ad37fce4f9dee2c46faf41950a9b21a546177a4476c9f1dba
+  languageName: node
+  linkType: hard
+
 "react-native-gesture-handler@npm:^2.5.0":
   version: 2.5.0
   resolution: "react-native-gesture-handler@npm:2.5.0"
@@ -9695,6 +9707,16 @@ __metadata:
   bin:
     rimraf: ./bin.js
   checksum: 3ea587b981a19016297edb96d1ffe48af7e6af69660e3b371dbfc73722a73a0b0e9be5c88089fbeeb866c389c1098e07f64929c7414290504b855f54f901ab10
+  languageName: node
+  linkType: hard
+
+"rn-mmkv-storage-flipper@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "rn-mmkv-storage-flipper@npm:1.0.0"
+  peerDependencies:
+    react-native-flipper: "*"
+    react-native-mmkv-storage: "*"
+  checksum: 4008248ae84decca2fe15c48469368fe071c42a0d3eeca3381860d49409e3695334a451bcd5b0c7a757f680782e7d4d960b3fd496e487b29937d71263fcf608b
   languageName: node
   linkType: hard
 

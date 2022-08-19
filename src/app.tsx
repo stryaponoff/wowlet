@@ -12,6 +12,7 @@ import { useInjection } from 'inversify-react'
 import { Services } from '@/ioc/services'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import MainStoreReactionProvider from './components/reaction-providers/MainStoreReactionProvider'
+import CardStoreReactionProvider from '@/components/reaction-providers/CardStoreReactionProvider'
 
 export const navigationRef = createNavigationContainerRef<MainNavigatorParamList>()
 
@@ -29,7 +30,9 @@ const App: React.FC = observer(() => {
         <NavigationContainer ref={navigationRef} theme={mainStore.theme}>
           <GestureHandlerRootView style={{ flex: 1 }}>
             <MainStoreReactionProvider>
-              <MainNavigator />
+              <CardStoreReactionProvider>
+                <MainNavigator />
+              </CardStoreReactionProvider>
             </MainStoreReactionProvider>
           </GestureHandlerRootView>
         </NavigationContainer>

@@ -1,57 +1,20 @@
-import { DateTime } from 'luxon'
-import { injectable } from 'inversify'
+import { inject, injectable } from 'inversify'
 import { action, makeAutoObservable } from 'mobx'
 import type { BaseRepositoryInterface } from '@/services/store/BaseRepositoryInterface'
 import EntityAlreadyExistsError from '@/errors/EntityAlreadyExistsError'
 import EntityDoesNotExistError from '@/errors/EntityDoesNotExistError'
 import deepmerge from 'deepmerge'
 import type Card from '@/entities/Card'
-import type { SortBy, SortDirection } from '@/utils/types/sort'
 import AbsurdError from '@/errors/absurdError'
+import { Services } from '@/ioc/services'
+import type CardService from '@/services/card/CardService'
+import type { SortBy, SortDirection, Sorter } from '@/services/card/types'
 
 @injectable()
 export class CardStore implements BaseRepositoryInterface<Card> {
-  public entities: Record<string, Card> = {
-    1: {
-      id: '1',
-      barcode: {
-        code: 'test-1',
-        format: 'QR',
-      },
-      name: 'Магнит',
-      colorPrimary: '#d4301f',
-      colorSecondary: '#fff',
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-    },
-    2: {
-      id: '2',
-      barcode: {
-        code: 'test-2',
-        format: 'QR',
-      },
-      name: 'Триал спорт',
-      colorPrimary: '#f1d448',
-      colorSecondary: '#243076',
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-    },
-    3: {
-      id: '3',
-      barcode: {
-        code: '4606224105550',
-        format: 'EAN13',
-      },
-      name: 'Пятёрочка',
-      colorPrimary: '#499950',
-      colorSecondary: '#fff',
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-    },
-  }
+  public entities: Record<string, Card>
 
-  public sortDirection: SortDirection = 'desc'
-  public sortBy: SortBy = 'name'
+  public sorter: Sorter
 
   public insert = action((id: string, entity: Card): void => {
     if (id in this.entities) {
@@ -100,11 +63,17 @@ export class CardStore implements BaseRepositoryInterface<Card> {
   })
 
   public setSortDirection = action((direction: SortDirection) => {
-    this.sortDirection = direction
+    this.sorter = {
+      ...this.sorter,
+      direction,
+    }
   })
 
   public setSortBy = action((sortBy: SortBy) => {
-    this.sortBy = sortBy
+    this.sorter = {
+      ...this.sorter,
+      sortBy,
+    }
   })
 
   private getSorter(): (a: Card, b: Card) => number {
@@ -114,7 +83,7 @@ export class CardStore implements BaseRepositoryInterface<Card> {
         return ascResult
       }
 
-      if (this.sortDirection === 'asc') {
+      if (this.sorter.direction === 'asc') {
         return ascResult
       } else {
         return -ascResult
@@ -122,23 +91,28 @@ export class CardStore implements BaseRepositoryInterface<Card> {
     }
 
     const createdAtSorter = (a: Card, b: Card) => {
-      if  (this.sortDirection === 'asc') {
+      if  (this.sorter.direction === 'asc') {
         return a < b ? 1 : -1
       } else {
         return a > b ? 1 : -1
       }
     }
 
-    if (this.sortBy === 'name') {
+    if (this.sorter.sortBy === 'name') {
       return nameSorter
-    } else if (this.sortBy === 'createdAt') {
+    } else if (this.sorter.sortBy === 'createdAt') {
       return createdAtSorter
     } else {
-      throw new AbsurdError(this.sortBy)
+      throw new AbsurdError(this.sorter.sortBy)
     }
   }
 
-  constructor() {
+  constructor(
+    @inject(Services.CardService) protected readonly cardService: CardService
+  ) {
+    this.entities = Object.fromEntries(this.cardService.getCards().map(card => [card.id, card]))
+    this.sorter = this.cardService.getSorter()
+
     makeAutoObservable(this)
   }
 }

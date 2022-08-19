@@ -3,8 +3,9 @@ import { MMKVLoader } from 'react-native-mmkv-storage'
 import type { ThemeTypeWithAuto } from '@/services/theme/types'
 import { isThemeType } from '@/services/theme/types'
 import { injectable } from 'inversify'
+import mmkvFlipper from 'rn-mmkv-storage-flipper'
 
-enum SettingsRepoKeys {
+enum SettingsRepositoryKeys {
   PREFERRED_THEME = 'preferredTheme',
 }
 
@@ -17,10 +18,14 @@ export default class SettingsRepository {
     this.storage = new MMKVLoader()
       .withServiceName(this.key)
       .initialize()
+
+    if (__DEV__) {
+      mmkvFlipper(this.storage)
+    }
   }
 
   public getPreferredTheme(): ThemeTypeWithAuto {
-    const value = this.storage.getString(SettingsRepoKeys.PREFERRED_THEME)
+    const value = this.storage.getString(SettingsRepositoryKeys.PREFERRED_THEME)
     if (isThemeType(value)) {
       return value
     }
@@ -29,6 +34,6 @@ export default class SettingsRepository {
   }
 
   public setPreferredTheme(theme: ThemeTypeWithAuto) {
-    this.storage.setString(SettingsRepoKeys.PREFERRED_THEME, theme)
+    this.storage.setString(SettingsRepositoryKeys.PREFERRED_THEME, theme)
   }
 }
