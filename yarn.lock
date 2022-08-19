@@ -2855,6 +2855,7 @@ __metadata:
     react-native-reanimated: ^2.9.1
     react-native-safe-area-context: ^4.3.1
     react-native-screens: ^3.15.0
+    react-native-super-grid: ^4.4.3
     react-native-svg: ^12.4.4
     react-native-uuid: ^2.0.1
     react-native-vector-icons: ^9.2.0
@@ -8918,7 +8919,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.6.0, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -9175,6 +9176,18 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: ebc3cded19d594aafa748d5ab6e237533f68dc33e28a584c99b8a6cac993585919f01413b94e9801f01af4a138810575f55ee25f90d7a77cb13c49d3252edb2a
+  languageName: node
+  linkType: hard
+
+"react-native-super-grid@npm:^4.4.3":
+  version: 4.4.3
+  resolution: "react-native-super-grid@npm:4.4.3"
+  dependencies:
+    prop-types: ^15.6.0
+  peerDependencies:
+    react: ">=16.8.0"
+    react-native: ">=0.59.0"
+  checksum: 866301856908728343f92a8f095fce890fa8cc2d22d0d249d0b2288e6d66fa18fc2b64f8516956effc2ffbe3401417d49654e5c7bc0ec7a7103a74c3aa1dddb6
   languageName: node
   linkType: hard
 

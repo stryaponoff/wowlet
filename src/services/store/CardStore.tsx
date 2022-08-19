@@ -30,7 +30,7 @@ export class CardStore implements BaseRepositoryInterface<Card> {
         code: 'test-2',
         format: 'QR',
       },
-      name: 'Триал спорт Триал спорт Триал спорт Триал спорт',
+      name: 'Триал спорт',
       colorPrimary: '#f1d448',
       colorSecondary: '#243076',
       createdAt: DateTime.now(),
