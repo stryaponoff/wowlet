@@ -27,5 +27,11 @@
       "light": "Light",
       "auto": "Auto"
     }
+  },
+  "ScanScreen": {
+    "title": "Scan barcode"
+  },
+  "ScanResultScreen": {
+    "title": "Add new card"
   }
 }

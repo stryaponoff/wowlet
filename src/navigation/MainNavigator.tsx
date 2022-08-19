@@ -71,8 +71,21 @@ const MainNavigator: React.FC = () => {
         component={BarcodeScreen}
       />
 
-      <Stack.Screen name={ScanScreenName} component={ScanScreen} />
-      <Stack.Screen name={ScanResultScreenName} component={ScanResultScreen} />
+      <Stack.Screen
+        name={ScanScreenName}
+        component={ScanScreen}
+        options={{
+          title: t('ScanScreen.title'),
+        }}
+      />
+
+      <Stack.Screen
+        name={ScanResultScreenName}
+        component={ScanResultScreen}
+        options={{
+          title: t('ScanResultScreen.title'),
+        }}
+      />
 
       <Stack.Screen
         name={SettingsScreenName}
