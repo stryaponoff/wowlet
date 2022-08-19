@@ -38,7 +38,7 @@ const CardComponent: React.FC<CardProps> = ({ data, onPress }) => {
         </TouchableRipple>
       </View>
 
-      <Text variant="labelLarge" style={styles.cardName} numberOfLines={1}>{data.name}</Text>
+      <Text variant="titleSmall" style={styles.cardName} numberOfLines={1}>{data.name}</Text>
     </View>
   )
 }

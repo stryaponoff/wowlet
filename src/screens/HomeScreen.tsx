@@ -32,10 +32,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = observer(({ navigation }) =
 
   return (
     <BaseScreenWrapper>
-      <BaseContentWrapper>
+      <BaseContentWrapper noHorizontalPadding>
         <CardList
           data={cardStore.getAll()}
-          style={{ flexGrow: 1 }}
           onPress={cardId => navigateToBarcodeScreen(cardId)}
           numColumns={2}
         />

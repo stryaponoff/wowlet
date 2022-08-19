@@ -19,9 +19,12 @@ const CardList: React.FC<CardListProps> = ({
 }) => {
   return (
     <FlatGrid
+      maxItemsPerRow={numColumns}
+      itemDimension={50}
+      adjustGridToStyles
+      key={`card-list-${numColumns}-cols`}
       data={data}
       keyExtractor={item => item.id}
-      maxItemsPerRow={3}
       renderItem={({ item }) => {
         return (
           <CardComponent data={item} onPress={() => onPress ? onPress(item.id) : {}} />
