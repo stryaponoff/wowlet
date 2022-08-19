@@ -21,20 +21,24 @@ const CardComponent: React.FC<CardProps> = ({ data, onPress }) => {
 
   return (
     <View>
-      <View style={styles.cardWrapperRound}>
+      <View
+        style={[styles.cardWrapper, { backgroundColor: data.colorPrimary }]}
+        onLayout={calculateAvatarSize}
+      >
+        <View>
+          <Avatar.Text
+            size={avatarSize}
+            style={{ backgroundColor: data.colorSecondary }}
+            // color={data.colorSecondary.toString()}
+            label={data.name.slice(0, 1).toUpperCase()}
+          />
+        </View>
+
         <TouchableRipple
-          style={[styles.cardWrapper, { backgroundColor: data.colorPrimary }]}
+          style={StyleSheet.absoluteFill}
           onPress={onPress}
-          onLayout={calculateAvatarSize}
         >
-          <View>
-            <Avatar.Text
-              size={avatarSize}
-              style={{ backgroundColor: data.colorSecondary }}
-              // color={data.colorSecondary.toString()}
-              label={data.name.slice(0, 1).toUpperCase()}
-            />
-          </View>
+          <View />
         </TouchableRipple>
       </View>
 
@@ -45,14 +49,12 @@ const CardComponent: React.FC<CardProps> = ({ data, onPress }) => {
 
 const styles = StyleSheet.create({
   cardWrapper: {
+    overflow: 'hidden',
+    borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 2,
+    elevation: 3,
     aspectRatio:  3.37 / 2.125, // bank card aspect ratio
-  },
-  cardWrapperRound: {
-    borderRadius: 8,
-    overflow: 'hidden',
   },
   cardName: {
     width: '100%',
