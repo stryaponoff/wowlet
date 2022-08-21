@@ -32,5 +32,17 @@ module.exports = {
         'react-hooks/exhaustive-deps': 'off',
       },
     },
+    {
+        'files': [
+          'jest.setup.js',
+          '**/*.spec.js',
+          '**/*.spec.jsx',
+          '**/*.spec.ts',
+          '**/*.spec.tsx',
+        ],
+        'env': {
+          'jest': true,
+        },
+    },
   ],
 };

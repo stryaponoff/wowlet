@@ -9,8 +9,6 @@ import BaseContentWrapper from '@/components/screens/BaseContentWrapper'
 import DeviceBrightness from '@adrianso/react-native-device-brightness'
 import { observer } from 'mobx-react'
 import { useInjection } from 'inversify-react'
-import type { BaseRepositoryInterface } from '@/services/store/BaseRepositoryInterface'
-import type Card from '@/entities/Card'
 import { Services } from '@/ioc/services'
 import type { CardStore } from '@/services/store/CardStore'
 

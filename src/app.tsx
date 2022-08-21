@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import React from 'react'
 import { createNavigationContainerRef } from '@react-navigation/core'
 import type { MainNavigatorParamList } from '@/navigation/MainNavigator'
 import MainNavigator from '@/navigation/MainNavigator'

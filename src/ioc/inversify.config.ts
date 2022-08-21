@@ -1,5 +1,6 @@
 import { Container } from 'inversify'
 import { Services } from '@/ioc/services'
+import 'reflect-metadata'
 
 import type CameraServiceInterface from '@/services/camera/CameraServiceInterface'
 import CameraService from '@/services/camera/CameraService'
@@ -17,8 +18,9 @@ import { MainStore } from '@/services/store/MainStore'
 import { CardStore } from '@/services/store/CardStore'
 
 import SettingsRepository from '@/repositories/SettingsRepository'
-import SettingsService from '@/services/settings/SettingsService'
 import type SettingsServiceInterface from '@/services/settings/SettingsServiceInterface'
+import SettingsService from '@/services/settings/SettingsService'
+
 import CardRepository from '@/repositories/CardRepository'
 import type CardServiceInterface from '@/services/card/CardServiceInterface'
 import CardService from '@/services/card/CardService'

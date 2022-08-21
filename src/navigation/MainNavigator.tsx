@@ -7,13 +7,11 @@ import { ScanScreen, ScanScreenName } from '@/screens/ScanScreen'
 import type { Barcode } from '@/services/barcode/types'
 import { useTranslation } from 'react-i18next'
 import { BarcodeScreen, BarcodeScreenName } from '@/screens/BarcodeScreen'
-import { HomeScreenThreeDotButton } from '@/components/screens/HomeScreen/HomeScreenThreeDotButton'
+import { ThreeDotMenu } from '@/components/ThreeDotMenu'
 import { HomeScreenSortButton } from '@/components/screens/HomeScreen/HomeScreenSortButton'
 import type Card from '@/entities/Card'
 import type { RecordFieldType } from '@/utils/types/RecordFieldType'
 import { SettingsScreen, SettingsScreenName } from '@/screens/SettingsScreen'
-import type { StackNavigationProp } from '@react-navigation/stack/src/types'
-import type { RouteProp } from '@react-navigation/core'
 
 export type MainNavigatorParamList = {
   [HomeScreenName]: undefined
@@ -52,14 +50,22 @@ const MainNavigator: React.FC = () => {
         component={HomeScreen}
         options={{
           title: t('HomeScreen.title'),
-          header: ({ navigation, route, options }) => (
+          header: ({ navigation, options }) => (
             <Appbar.Header mode="large">
               <Appbar.Content title={options.title} />
 
               <HomeScreenSortButton />
-              <HomeScreenThreeDotButton
-                navigation={navigation as StackNavigationProp<MainNavigatorParamList, 'HomeScreen'>}
-                route={route as RouteProp<MainNavigatorParamList, 'HomeScreen'>}
+              <ThreeDotMenu
+                items={[
+                  {
+                    key: 'settings',
+                    icon: 'cog',
+                    label: t('HomeScreen.header.threeDotMenu.settingsButton'),
+                    onPress: () => {
+                      navigation.navigate(SettingsScreenName)
+                    },
+                  },
+                ]}
               />
             </Appbar.Header>
           ),

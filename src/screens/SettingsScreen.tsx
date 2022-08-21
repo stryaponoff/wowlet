@@ -69,6 +69,57 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = observer(({ navigat
             onPress={toggleTheme}
             left={() => <List.Icon icon={themeIcon} />}
           />
+
+          <List.Accordion
+            title={t('SettingsScreen.appearance.title')}
+            description={t(`SettingsScreen.appearance.${mainStore.preferredThemeType}`)}
+            left={() => <List.Icon icon={themeIcon} />}
+          >
+            <List.Item
+              title={t('SettingsScreen.appearance.auto')}
+              onPress={() => mainStore.setPreferredThemeType('auto')}
+              left={() => (
+                <List.Icon
+                  icon={ICON_THEME_AUTO}
+                  color={
+                    mainStore.preferredThemeType === 'auto'
+                      ? mainStore.theme.colors.primary
+                      : mainStore.theme.colors.text
+                  }
+                />
+              )}
+            />
+
+            <List.Item
+              title={t('SettingsScreen.appearance.dark')}
+              onPress={() => mainStore.setPreferredThemeType('dark')}
+              left={() => (
+                <List.Icon
+                  icon={ICON_THEME_DARK}
+                  color={
+                    mainStore.preferredThemeType === 'dark'
+                      ? mainStore.theme.colors.primary
+                      : mainStore.theme.colors.text
+                  }
+                />
+              )}
+            />
+
+            <List.Item
+              title={t('SettingsScreen.appearance.light')}
+              onPress={() => mainStore.setPreferredThemeType('light')}
+              left={() => (
+                <List.Icon
+                  icon={ICON_THEME_LIGHT}
+                  color={
+                    mainStore.preferredThemeType === 'light'
+                      ? mainStore.theme.colors.primary
+                      : mainStore.theme.colors.text
+                  }
+                />
+              )}
+            />
+          </List.Accordion>
         </List.Section>
       </BaseContentWrapper>
     </BaseScreenWrapper>
