@@ -2,7 +2,6 @@ import type { MMKVInstance } from 'react-native-mmkv-storage'
 import { MMKVLoader } from 'react-native-mmkv-storage'
 import { injectable } from 'inversify'
 import type Card from '@/entities/Card'
-import { DateTime } from 'luxon'
 import type { Sorter } from '@/services/card/types'
 import mmkvFlipper from 'rn-mmkv-storage-flipper'
 

@@ -13,6 +13,7 @@ import { Services } from '@/ioc/services'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import MainStoreReactionProvider from './components/reaction-providers/MainStoreReactionProvider'
 import CardStoreReactionProvider from '@/components/reaction-providers/CardStoreReactionProvider'
+import { StyleSheet } from 'react-native'
 
 export const navigationRef = createNavigationContainerRef<MainNavigatorParamList>()
 
@@ -28,7 +29,7 @@ const App: React.FC = observer(() => {
     <PaperProvider theme={mainStore.theme}>
       <SafeAreaProvider>
         <NavigationContainer ref={navigationRef} theme={mainStore.theme}>
-          <GestureHandlerRootView style={{ flex: 1 }}>
+          <GestureHandlerRootView style={styles.wrapper}>
             <MainStoreReactionProvider>
               <CardStoreReactionProvider>
                 <MainNavigator />
@@ -39,6 +40,12 @@ const App: React.FC = observer(() => {
       </SafeAreaProvider>
     </PaperProvider>
   )
+})
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+  },
 })
 
 export default App

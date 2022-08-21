@@ -1,7 +1,7 @@
 import React from 'react'
 import { Appbar, Menu, Switch } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
-import { View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { observer } from 'mobx-react'
 import { useInjection } from 'inversify-react'
@@ -38,12 +38,14 @@ export const HomeScreenSortButton: React.FC = observer(() => {
       onDismiss={closeMenu}
       anchor={<Appbar.Action icon="sort" onPress={openMenu} />}
     >
-      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 8 }}>
+      <View style={styles.sortDirectionWrapper}>
         <Icon name="sort-reverse-variant" size={24} />
+
         <Switch
           value={isDesc}
           onValueChange={setIsDesc}
         />
+
         <Icon name="sort-variant" size={24} />
       </View>
 
@@ -60,4 +62,13 @@ export const HomeScreenSortButton: React.FC = observer(() => {
       />
     </Menu>
   )
+})
+
+const styles = StyleSheet.create({
+  sortDirectionWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 8,
+  },
 })

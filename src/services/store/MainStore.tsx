@@ -1,4 +1,4 @@
-import { action, makeAutoObservable, reaction } from 'mobx'
+import { action, makeAutoObservable } from 'mobx'
 import { inject, injectable } from 'inversify'
 import { Services } from '@/ioc/services'
 import type LanguageService from '@/services/language/LanguageService'

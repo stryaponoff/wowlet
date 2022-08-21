@@ -1,17 +1,14 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import type { StackScreenProps } from '@react-navigation/stack'
 import type { MainNavigatorParamList } from '@/navigation/MainNavigator'
-import { List, Text } from 'react-native-paper'
-import BarcodeView from '@kichiyaki/react-native-barcode-generator'
-import QRCode from 'react-native-qrcode-svg'
+import { List } from 'react-native-paper'
 import BaseScreenWrapper from '@/components/screens/BaseScreenWrapper'
 import BaseContentWrapper from '@/components/screens/BaseContentWrapper'
 import TextInput from '@/components/form/fields/TextInput'
 import { useTranslation } from 'react-i18next'
 import BarcodeFormatDropdown from '@/components/form/fields/BarcodeFormatDropdown'
 import Button from '@/components/buttons/Button'
-import { Barcode } from '@/components/Barcode'
 
 export const ScanResultScreenName = 'ScanResultScreen' as const
 type ScanResultScreenProps = StackScreenProps<MainNavigatorParamList, typeof ScanResultScreenName>

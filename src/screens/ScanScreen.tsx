@@ -69,13 +69,3 @@ export const ScanScreen: React.FC<ScanScreenProps> = ({ navigation }) => {
     </BaseScreenWrapper>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  contentContainer: {
-    flex: 1,
-    padding: 8,
-  },
-})

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { injectable } from 'inversify'
 import type { ThemeTypeWithAuto } from '@/services/theme/types'
 

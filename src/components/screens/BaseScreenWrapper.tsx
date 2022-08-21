@@ -11,7 +11,7 @@ const BaseScreenWrapper: React.FC<PropsWithChildren> = observer(
     const { statusBarStyle, statusBarColor } = useInjection<MainStore>(Services.MainStore)
 
     return (
-      <View style={{ flexGrow: 1 }}>
+      <View style={styles.wrapper}>
         <StatusBar
           backgroundColor={statusBarColor}
           barStyle={statusBarStyle}
@@ -19,7 +19,7 @@ const BaseScreenWrapper: React.FC<PropsWithChildren> = observer(
           translucent={false}
         />
 
-        <View style={styles.container}>
+        <View style={styles.contentWrapper}>
           {children}
         </View>
       </View>
@@ -27,7 +27,10 @@ const BaseScreenWrapper: React.FC<PropsWithChildren> = observer(
   }
 )
 const styles = StyleSheet.create({
-  container: {
+  wrapper: {
+    flexGrow: 1,
+  },
+  contentWrapper: {
     flex: 1,
   },
 })
