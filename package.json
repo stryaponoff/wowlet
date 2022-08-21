@@ -77,7 +77,11 @@
     "reflect-metadata": "^0.1.13",
     "rn-mmkv-storage-flipper": "^1.0.0",
     "ts-jest": "^28.0.8",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "yorkie": "^2.0.0"
+  },
+  "gitHooks": {
+    "pre-commit": "yarn lint && yarn test"
   },
   "packageManager": "yarn@3.2.2"
 }
