@@ -7,6 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
+    "coverage": "jest --coverage --collectCoverageFrom=\"./src/**/*.{ts,tsx,js,jsx}\"",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "clean": "cd android && ./gradlew clean",
     "build-android-debug": "cd ./android/ && ./gradlew assembleDebug",
