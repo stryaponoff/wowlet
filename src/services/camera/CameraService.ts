@@ -8,7 +8,7 @@ export default class CameraService implements CameraServiceInterface {
     const cameraPermission = await Camera.getCameraPermissionStatus()
     if (cameraPermission === 'authorized') {
       return true
-    } else {
+    } else if (cameraPermission !== 'denied') {
       const newCameraPermission = await Camera.requestCameraPermission()
       if (newCameraPermission === 'authorized') {
         return true
