@@ -19,7 +19,7 @@ export default class SettingsRepository {
       .withServiceName(this.key)
       .initialize()
 
-    if (__DEV__) {
+    if (__DEV__ && !process.env.JEST_WORKER_ID) {
       mmkvFlipper(this.storage)
     }
   }

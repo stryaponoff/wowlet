@@ -1,0 +1,25 @@
+{
+  "fields": {
+    "name": "Name",
+    "code": "Code",
+    "codeFormat": "Barcode format"
+  },
+  "rules": {
+    "phone": "The {{attribute}} must be a valid phone number",
+    "email": "The {{attribute}} must be a valid email address",
+    "max": {
+      "number": "The {{attribute}} must be less than {{max}} or equal",
+      "string": "The {{attribute}} must not be greater than {{max}} characters"
+    },
+    "min": {
+      "number": "The {{attribute}} must be greater than {{min}} or equal",
+      "string": "The {{attribute}} must be at least {{min}} characters"
+    },
+    "oneOf": "{{attribute}} must be one of the following values: {{values}}",
+    "password": {
+      "confirmation": "Passwords must match"
+    },
+    "required": "{{attribute}} is required",
+    "address_required": "You must select the delivery address"
+  }
+}

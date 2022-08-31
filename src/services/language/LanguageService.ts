@@ -3,6 +3,7 @@ import type { Callback, TFunction } from 'i18next'
 import i18next from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import messagesEn from '@/i18n/en/messages.json'
+import formEn from '@/i18n/en/form.json'
 import type { Language, LanguageResources } from '@/services/language/types'
 import { isLanguage } from '@/services/language/types'
 import type LanguageServiceInterface from '@/services/language/LanguageServiceInterface'
@@ -24,7 +25,7 @@ export default class LanguageService implements LanguageServiceInterface {
     protected readonly keySeparator = '.',
     protected readonly fallbackLanguage: Language = 'en',
     protected readonly namespaces = [
-      'default',
+      'default', 'form',
     ] as const
   ) {
     const lng: Language = this.getDefaultLanguage()
@@ -32,6 +33,7 @@ export default class LanguageService implements LanguageServiceInterface {
     const resources: LanguageResources<typeof this.namespaces[number]> = {
       en: {
         default: messagesEn,
+        form: formEn,
       },
     }
 
