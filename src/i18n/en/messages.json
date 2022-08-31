@@ -1,4 +1,12 @@
 {
+  "common": {
+    "action": {
+      "undo": "Undo"
+    },
+    "card": {
+      "deletedSuccessfully": "Card {{name}} was deleted"
+    }
+  },
   "sort": {
     "sortBy": {
       "name": "Name",
@@ -67,6 +75,13 @@
   },
   "ScanResultScreen": {
     "title": "Add new card"
+  },
+  "BarcodeScreen": {
+    "header": {
+      "threeDotMenu": {
+        "deleteButton": "Delete"
+      }
+    }
   },
   "barcodeFormat": {
     "ITF": "ITF",

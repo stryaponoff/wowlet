@@ -15,6 +15,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import MainStoreReactionProvider from './components/reaction-providers/MainStoreReactionProvider'
 import CardStoreReactionProvider from '@/components/reaction-providers/CardStoreReactionProvider'
 import { StyleSheet } from 'react-native'
+import { SnackbarProvider } from '@/providers/SnackbarProvider/SnackbarProvider'
 
 const App: React.FC = observer(() => {
   const navigationRef = useNavigationContainerRef<MainNavigatorParamList>()
@@ -36,7 +37,9 @@ const App: React.FC = observer(() => {
           <GestureHandlerRootView style={styles.wrapper}>
             <MainStoreReactionProvider>
               <CardStoreReactionProvider>
-                <MainNavigator />
+                <SnackbarProvider>
+                  <MainNavigator />
+                </SnackbarProvider>
               </CardStoreReactionProvider>
             </MainStoreReactionProvider>
           </GestureHandlerRootView>
