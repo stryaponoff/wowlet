@@ -1,7 +1,8 @@
 import React from 'react'
-import { createNavigationContainerRef } from '@react-navigation/core'
+import { useNavigationContainerRef } from '@react-navigation/core'
 import type { MainNavigatorParamList } from '@/navigation/MainNavigator'
 import MainNavigator from '@/navigation/MainNavigator'
+import { useFlipper } from '@react-navigation/devtools'
 import { NavigationContainer } from '@react-navigation/native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { Provider as PaperProvider } from 'react-native-paper'
@@ -15,9 +16,12 @@ import MainStoreReactionProvider from './components/reaction-providers/MainStore
 import CardStoreReactionProvider from '@/components/reaction-providers/CardStoreReactionProvider'
 import { StyleSheet } from 'react-native'
 
-export const navigationRef = createNavigationContainerRef<MainNavigatorParamList>()
-
 const App: React.FC = observer(() => {
+  const navigationRef = useNavigationContainerRef<MainNavigatorParamList>()
+  if (__DEV__ && !process.env.JEST_WORKER_ID) {
+    useFlipper(navigationRef)
+  }
+
   const mainStore = useInjection<MainStore>(Services.MainStore)
 
   const { isInit: isLanguageServerInit } = useLanguageService()
