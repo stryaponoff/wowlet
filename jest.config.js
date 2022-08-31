@@ -17,6 +17,6 @@ module.exports = {
     './node_modules/react-native-gesture-handler/jestSetup.js',
   ],
   'transformIgnorePatterns': [
-    'node_modules/(?!(react-native|@react-native|react-native-reanimated|react-native-vector-icons|react-native-iphone-x-helper|react-native-paper-dropdown|react-native-super-grid)/)',
+    'node_modules/(?!(react-native|@react-native|react-native-flipper|react-native-reanimated|react-native-vector-icons|react-native-iphone-x-helper|react-native-paper-dropdown|react-native-super-grid)/)',
   ],
 };

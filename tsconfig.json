@@ -3,7 +3,7 @@
   "extends": "@tsconfig/react-native/tsconfig.json",     /* Recommended React Native TSConfig base */
   "compilerOptions": {
     "strict": true,
-    "types": ["reflect-metadata", "jest"],
+    "types": ["reflect-metadata", "jest", "node"],
     "module": "commonjs",
     "moduleResolution": "node",
     "experimentalDecorators": true,
