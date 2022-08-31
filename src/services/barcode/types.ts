@@ -12,16 +12,20 @@ export const BARCODE_FORMAT_MAP: Record<BarcodeFormat, VisionCameraBarcodeFormat
   'QR': VisionCameraBarcodeFormat.QR_CODE,
 }
 
-export type BarcodeFormat =
-  | 'ITF'
-  | 'CODE39'
-  | 'CODE128'
-  | 'EAN13'
-  | 'EAN8'
-  | 'UPC'
-  | 'UPCE'
-  | 'codabar'
-  | 'QR'
+
+export const BarcodeFormatArr = [
+  'ITF',
+  'CODE39',
+  'CODE128',
+  'EAN13',
+  'EAN8',
+  'UPC',
+  'UPCE',
+  'codabar',
+  'QR',
+] as const
+
+export type BarcodeFormat = typeof BarcodeFormatArr[number]
 
 export type Barcode = {
   code: string
