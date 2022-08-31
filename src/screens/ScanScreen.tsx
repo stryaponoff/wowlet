@@ -23,11 +23,12 @@ export const ScanScreen: React.FC<ScanScreenProps> = ({ navigation }) => {
   const barcodeService = useInjection<BarcodeServiceInterface>(Services.BarcodeService)
 
   const [isCameraPermissionsGranted, setCameraPermissionsGranted] = useState(false)
+  const [foundBarcode, setFoundBarcode] = useState<Barcode | null>(null)
 
   const processBarcodes = (barcodes: VisionCameraBarcode[]) => {
     const code = barcodeService.processRawData(barcodes)
     if (code) {
-      navigateToScanResults(code)
+      setFoundBarcode(code)
     }
   }
 
@@ -42,6 +43,12 @@ export const ScanScreen: React.FC<ScanScreenProps> = ({ navigation }) => {
       setCameraPermissionsGranted(await cameraService.getOrRequestCameraPermissions())
     })()
   }, [cameraService])
+
+  useEffect(() => {
+    if (foundBarcode) {
+      navigateToScanResults(foundBarcode)
+    }
+  }, [foundBarcode])
 
   const { back: backCamera } = useCameraDevices()
 
