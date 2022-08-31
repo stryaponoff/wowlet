@@ -1,4 +1,5 @@
-import { action, makeAutoObservable } from 'mobx'
+import { action, makeAutoObservable, spy } from 'mobx'
+import { createMobxDebugger } from 'mobx-flipper'
 import { inject, injectable } from 'inversify'
 import { Services } from '@/ioc/services'
 import type LanguageService from '@/services/language/LanguageService'
@@ -57,5 +58,9 @@ export class MainStore {
     this.preferredThemeType = this.settingsService.getPreferredTheme()
 
     makeAutoObservable(this)
+    if (__DEV__ && !process.env.JEST_WORKER_ID) {
+      // @ts-ignore // todo fix this
+      spy(createMobxDebugger(this))
+    }
   }
 }

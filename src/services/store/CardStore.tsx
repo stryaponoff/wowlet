@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify'
-import { action, makeAutoObservable } from 'mobx'
+import { action, get, makeAutoObservable, remove, set, values } from 'mobx'
 import type { BaseRepositoryInterface } from '@/services/store/BaseRepositoryInterface'
 import EntityAlreadyExistsError from '@/errors/EntityAlreadyExistsError'
 import EntityDoesNotExistError from '@/errors/EntityDoesNotExistError'
@@ -12,32 +12,32 @@ import type { SortBy, SortDirection, Sorter } from '@/services/card/types'
 
 @injectable()
 export class CardStore implements BaseRepositoryInterface<Card> {
-  public entities: Record<string, Card>
+  public entities: Record<string, Card> = {}
 
   public sorter: Sorter
 
-  public insert = action((id: string, entity: Card): void => {
+  public insert = action((id: string, entity: Omit<Card, 'id'>): void => {
     if (id in this.entities) {
       throw new EntityAlreadyExistsError(id)
     }
 
-    this.entities[id] = entity
+    set(this.entities, id, entity)
   })
 
-  public replace = action((id: string, entity: Card): void => {
+  public replace = action((id: string, entity: Omit<Card, 'id'>): void => {
     if (!(id in this.entities)) {
       throw new EntityDoesNotExistError(id)
     }
 
-    this.entities[id] = entity
+    set(this.entities, id, entity)
   })
 
-  public update = action((id: string, data: Partial<Card>): void => {
+  public update = action((id: string, data: Partial<Omit<Card, 'id'>>): void => {
     if (!(id in this.entities)) {
       throw new EntityDoesNotExistError(id)
     }
 
-    this.entities[id] = deepmerge(this.entities[id], data)
+    set(this.entities, id, deepmerge(get(this.entities, id), data))
   })
 
   public delete = action((id: string): void => {
@@ -45,12 +45,16 @@ export class CardStore implements BaseRepositoryInterface<Card> {
       throw new EntityDoesNotExistError(id)
     }
 
-    delete this.entities[id]
+    remove(this.entities, id)
   })
 
-  public getAll = ((): Card[] => {
-    return Object.values(this.entities).sort(this.getSorter())
-  })
+  public getAll() {
+    return [...values(this.entities)].sort(this.getSorter())
+  }
+
+  public get all() {
+    return values(this.entities) as unknown as Card[]
+  }
 
   public get = action((id: string): Card => {
     const entity = this.getAll().find(({ id: _id }) => _id === id)
