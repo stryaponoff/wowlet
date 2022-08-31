@@ -20,6 +20,8 @@ type BarcodeFormatDropdown = Omit<
 > & {
   onChange?: (value: BarcodeFormat) => void
   style?: StyleProp<ViewStyle>
+  hasError?: boolean // TODO: Make it work
+  errorText?: string // TODO: Make it work
 }
 
 const BarcodeFormatDropdown: React.FC<BarcodeFormatDropdown> = observer(
