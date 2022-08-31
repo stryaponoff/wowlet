@@ -7,8 +7,6 @@ import { ScanScreen, ScanScreenName } from '@/screens/ScanScreen'
 import type { Barcode } from '@/services/barcode/types'
 import { useTranslation } from 'react-i18next'
 import { BarcodeScreen, BarcodeScreenName } from '@/screens/BarcodeScreen'
-import { ThreeDotMenu } from '@/components/ThreeDotMenu'
-import { HomeScreenSortButton } from '@/components/screens/HomeScreen/HomeScreenSortButton'
 import type Card from '@/entities/Card'
 import type { RecordFieldType } from '@/utils/types/RecordFieldType'
 import { SettingsScreen, SettingsScreenName } from '@/screens/SettingsScreen'
@@ -48,28 +46,7 @@ const MainNavigator: React.FC = () => {
       <Stack.Screen
         name={HomeScreenName}
         component={HomeScreen}
-        options={{
-          title: t('HomeScreen.title'),
-          header: ({ navigation, options }) => (
-            <Appbar.Header mode="large">
-              <Appbar.Content title={options.title} />
-
-              <HomeScreenSortButton />
-              <ThreeDotMenu
-                items={[
-                  {
-                    key: 'settings',
-                    icon: 'cog',
-                    label: t('HomeScreen.header.threeDotMenu.settingsButton'),
-                    onPress: () => {
-                      navigation.navigate(SettingsScreenName)
-                    },
-                  },
-                ]}
-              />
-            </Appbar.Header>
-          ),
-        }}
+        options={{ title: t('HomeScreen.title') }}
       />
 
       <Stack.Screen
@@ -80,17 +57,13 @@ const MainNavigator: React.FC = () => {
       <Stack.Screen
         name={ScanScreenName}
         component={ScanScreen}
-        options={{
-          title: t('ScanScreen.title'),
-        }}
+        options={{ title: t('ScanScreen.title') }}
       />
 
       <Stack.Screen
         name={ScanResultScreenName}
         component={ScanResultScreen}
-        options={{
-          title: t('ScanResultScreen.title'),
-        }}
+        options={{ title: t('ScanResultScreen.title') }}
       />
 
       <Stack.Screen

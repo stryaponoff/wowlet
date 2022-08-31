@@ -59,7 +59,7 @@ const CardList: React.FC<CardListProps> = observer(
         adjustGridToStyles
         key={`card-list-${numColumns}-cols`}
         data={data}
-        keyExtractor={item => item.id}
+        keyExtractor={({ id }) => id}
         renderItem={({ item }) => {
           return (
             <CardComponent data={item} onPress={() => onPress ? onPress(item.id) : {}} />

@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify'
-import { action, get, makeAutoObservable, remove, set, values } from 'mobx'
+import { action, get, makeAutoObservable, set, values } from 'mobx'
 import type { BaseRepositoryInterface } from '@/services/store/BaseRepositoryInterface'
 import EntityAlreadyExistsError from '@/errors/EntityAlreadyExistsError'
 import EntityDoesNotExistError from '@/errors/EntityDoesNotExistError'
@@ -9,6 +9,7 @@ import AbsurdError from '@/errors/absurdError'
 import { Services } from '@/ioc/services'
 import type CardService from '@/services/card/CardService'
 import type { SortBy, SortDirection, Sorter } from '@/services/card/types'
+import { DateTime } from 'luxon'
 
 @injectable()
 export class CardStore implements BaseRepositoryInterface<Card> {
@@ -21,7 +22,7 @@ export class CardStore implements BaseRepositoryInterface<Card> {
       throw new EntityAlreadyExistsError(id)
     }
 
-    set(this.entities, id, entity)
+    set(this.entities, id, { ...entity, id })
   })
 
   public replace = action((id: string, entity: Omit<Card, 'id'>): void => {
@@ -37,7 +38,14 @@ export class CardStore implements BaseRepositoryInterface<Card> {
       throw new EntityDoesNotExistError(id)
     }
 
-    set(this.entities, id, deepmerge(get(this.entities, id), data))
+    set(
+      this.entities,
+      id,
+      deepmerge(
+        get(this.entities, id),
+        { ...data, updatedAt: DateTime.now() }
+      )
+    )
   })
 
   public delete = action((id: string): void => {
@@ -45,19 +53,49 @@ export class CardStore implements BaseRepositoryInterface<Card> {
       throw new EntityDoesNotExistError(id)
     }
 
-    remove(this.entities, id)
+    set(
+      this.entities,
+      id,
+      deepmerge(
+        get(this.entities, id),
+        { deletedAt: DateTime.now() }
+      )
+    )
+  })
+
+  public restore = action((id: string): void => {
+    if (!(id in this.entities)) {
+      throw new EntityDoesNotExistError(id)
+    }
+
+    set(
+      this.entities,
+      id,
+      deepmerge(
+        get(this.entities, id),
+        { deletedAt: undefined }
+      )
+    )
   })
 
   public getAll() {
-    return [...values(this.entities)].sort(this.getSorter())
+    return [...values(this.entities)]
+      .filter(({ isDeleted }) => !isDeleted)
+      .sort(this.getSorter())
+  }
+
+  public get allRaw() {
+    return values(this.entities)
   }
 
   public get all() {
-    return values(this.entities) as unknown as Card[]
+    return [...values(this.entities)]
+      .filter(({ deletedAt }) => !deletedAt)
+      .sort(this.getSorter())
   }
 
   public get = action((id: string): Card => {
-    const entity = this.getAll().find(({ id: _id }) => _id === id)
+    const entity = this.allRaw.find(({ id: _id }) => _id === id)
 
     if (!entity) {
       throw new EntityDoesNotExistError(id)

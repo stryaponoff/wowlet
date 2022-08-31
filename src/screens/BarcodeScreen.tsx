@@ -11,6 +11,11 @@ import { observer } from 'mobx-react'
 import { useInjection } from 'inversify-react'
 import { Services } from '@/ioc/services'
 import type { CardStore } from '@/services/store/CardStore'
+import { useTranslation } from 'react-i18next'
+import { Appbar } from 'react-native-paper'
+import { ThreeDotMenu } from '@/components/ThreeDotMenu'
+import { HomeScreenName } from '@/screens/HomeScreen'
+import { useSnackbar } from '@/providers/SnackbarProvider/useSnackbar'
 
 export const BarcodeScreenName = 'BarcodeScreen' as const
 type BarcodeScreenProps = StackScreenProps<MainNavigatorParamList, typeof BarcodeScreenName>
@@ -18,6 +23,9 @@ type BarcodeScreenProps = StackScreenProps<MainNavigatorParamList, typeof Barcod
 export const BarcodeScreen: React.FC<BarcodeScreenProps> = observer(({ navigation, route }) => {
   const cardStore = useInjection<CardStore>(Services.CardStore)
   const card = cardStore.get(route.params.cardId)
+
+  const { t } = useTranslation()
+  const snackbar = useSnackbar()
 
   useLayoutEffect(() => {
     DeviceBrightness.setBrightnessLevel(1)
@@ -28,8 +36,44 @@ export const BarcodeScreen: React.FC<BarcodeScreenProps> = observer(({ navigatio
   }, [])
 
   useLayoutEffect(() => {
-    navigation.setOptions({ title: cardStore.get(route.params.cardId).name })
-  }, [cardStore, navigation, route.params.cardId])
+    if (!navigation || !t) {
+      return
+    }
+
+    navigation.setOptions({
+      title: cardStore.get(route.params.cardId).name,
+      header: ({ navigation: nav, options }) => (
+        <Appbar.Header mode="center-aligned">
+          {nav.canGoBack() && <Appbar.BackAction onPress={() => nav.goBack()} />}
+
+          <Appbar.Content title={options.title} />
+
+          <ThreeDotMenu
+            items={[
+              {
+                key: 'delete',
+                icon: 'delete',
+                label: t('BarcodeScreen.header.threeDotMenu.deleteButton'),
+                onPress: () => {
+                  cardStore.delete(route.params.cardId)
+                  nav.replace(HomeScreenName)
+                  snackbar.notify(
+                    t('common.card.deletedSuccessfully', { name: cardStore.get(route.params.cardId).name }),
+                    {
+                      label: t('common.action.undo'),
+                      onPress: () => {
+                        cardStore.restore(route.params.cardId)
+                      },
+                    }
+                  )
+                },
+              },
+            ]}
+          />
+        </Appbar.Header>
+      ),
+    })
+  }, [cardStore, navigation, route.params.cardId, t])
 
   return (
     <BaseScreenWrapper>

@@ -13,9 +13,9 @@ const CardStoreReactionProvider: React.FC<PropsWithChildren> = observer(({ child
 
   useLayoutEffect(() => {
     reaction(
-      () => cardStore.entities,
+      () => cardStore.allRaw,
       value => {
-        cardService.setCards(Object.values(value))
+        cardService.setCards([...value])
       }
     )
 
