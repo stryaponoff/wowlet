@@ -1,9 +1,8 @@
 import { inject, injectable } from 'inversify'
-import { action, get, makeAutoObservable, set, values } from 'mobx'
+import { makeAutoObservable, set, values } from 'mobx'
 import type { BaseRepositoryInterface } from '@/services/store/BaseRepositoryInterface'
 import EntityAlreadyExistsError from '@/errors/EntityAlreadyExistsError'
 import EntityDoesNotExistError from '@/errors/EntityDoesNotExistError'
-import deepmerge from 'deepmerge'
 import type Card from '@/entities/Card'
 import AbsurdError from '@/errors/absurdError'
 import { Services } from '@/ioc/services'
@@ -17,23 +16,23 @@ export class CardStore implements BaseRepositoryInterface<Card> {
 
   public sorter: Sorter
 
-  public insert = action((id: string, entity: Omit<Card, 'id'>): void => {
+  public insert(id: string, entity: Omit<Card, 'id'>): void {
     if (id in this.entities) {
       throw new EntityAlreadyExistsError(id)
     }
 
     set(this.entities, id, { ...entity, id })
-  })
+  }
 
-  public replace = action((id: string, entity: Omit<Card, 'id'>): void => {
+  public replace(id: string, entity: Omit<Card, 'id'>): void {
     if (!(id in this.entities)) {
       throw new EntityDoesNotExistError(id)
     }
 
     set(this.entities, id, entity)
-  })
+  }
 
-  public update = action((id: string, data: Partial<Omit<Card, 'id'>>): void => {
+  public update(id: string, data: Partial<Omit<Card, 'id'>>): void {
     if (!(id in this.entities)) {
       throw new EntityDoesNotExistError(id)
     }
@@ -41,14 +40,15 @@ export class CardStore implements BaseRepositoryInterface<Card> {
     set(
       this.entities,
       id,
-      deepmerge(
-        get(this.entities, id),
-        { ...data, updatedAt: DateTime.now() }
-      )
+      {
+        ...this.entities[id],
+        ...data,
+        updatedAt: DateTime.now(),
+      }
     )
-  })
+  }
 
-  public delete = action((id: string): void => {
+  public delete(id: string): void {
     if (!(id in this.entities)) {
       throw new EntityDoesNotExistError(id)
     }
@@ -56,14 +56,14 @@ export class CardStore implements BaseRepositoryInterface<Card> {
     set(
       this.entities,
       id,
-      deepmerge(
-        get(this.entities, id),
-        { deletedAt: DateTime.now() }
-      )
+      {
+        ...this.entities[id],
+        deletedAt: DateTime.now(),
+      }
     )
-  })
+  }
 
-  public restore = action((id: string): void => {
+  public restore(id: string): void {
     if (!(id in this.entities)) {
       throw new EntityDoesNotExistError(id)
     }
@@ -71,17 +71,11 @@ export class CardStore implements BaseRepositoryInterface<Card> {
     set(
       this.entities,
       id,
-      deepmerge(
-        get(this.entities, id),
-        { deletedAt: undefined }
-      )
+      {
+        ...this.entities[id],
+        deletedAt: undefined,
+      }
     )
-  })
-
-  public getAll() {
-    return [...values(this.entities)]
-      .filter(({ isDeleted }) => !isDeleted)
-      .sort(this.getSorter())
   }
 
   public get allRaw() {
@@ -94,7 +88,7 @@ export class CardStore implements BaseRepositoryInterface<Card> {
       .sort(this.getSorter())
   }
 
-  public get = action((id: string): Card => {
+  public get(id: string): Card {
     const entity = this.allRaw.find(({ id: _id }) => _id === id)
 
     if (!entity) {
@@ -102,21 +96,21 @@ export class CardStore implements BaseRepositoryInterface<Card> {
     }
 
     return entity
-  })
+  }
 
-  public setSortDirection = action((direction: SortDirection) => {
+  public setSortDirection(direction: SortDirection) {
     this.sorter = {
       ...this.sorter,
       direction,
     }
-  })
+  }
 
-  public setSortBy = action((sortBy: SortBy) => {
+  public setSortBy(sortBy: SortBy) {
     this.sorter = {
       ...this.sorter,
       sortBy,
     }
-  })
+  }
 
   private getSorter(): (a: Card, b: Card) => number {
     const nameSorter = (a: Card, b: Card) => {
@@ -134,9 +128,17 @@ export class CardStore implements BaseRepositoryInterface<Card> {
 
     const createdAtSorter = (a: Card, b: Card) => {
       if  (this.sorter.direction === 'asc') {
-        return a < b ? 1 : -1
+        return a.createdAt < b.createdAt ? 1 : -1
       } else {
-        return a > b ? 1 : -1
+        return a.createdAt > b.createdAt ? 1 : -1
+      }
+    }
+
+    const lastUsedAtSorter = (a: Card, b: Card) => {
+      if  (this.sorter.direction === 'asc') {
+        return (a.lastUsedAt ?? 0) < (b.lastUsedAt ?? 0) ? 1 : -1
+      } else {
+        return (a.lastUsedAt ?? 0) > (b.lastUsedAt ?? 0) ? 1 : -1
       }
     }
 
@@ -144,6 +146,8 @@ export class CardStore implements BaseRepositoryInterface<Card> {
       return nameSorter
     } else if (this.sorter.sortBy === 'createdAt') {
       return createdAtSorter
+    } else if (this.sorter.sortBy === 'lastUsedAt') {
+      return lastUsedAtSorter
     } else {
       throw new AbsurdError(this.sorter.sortBy)
     }

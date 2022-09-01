@@ -4,5 +4,5 @@ export interface BaseRepositoryInterface<T> {
   update(id: string, data: Partial<T>): void
   delete(id: string): void
   get(id: string): T
-  getAll(): T[]
+  all: T[]
 }

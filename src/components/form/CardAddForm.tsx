@@ -65,7 +65,7 @@ export const CardAddForm: React.FC<CardAddFormProps> = observer(
             format: _values.codeFormat,
           },
           colorPrimary: 'red',
-          colorSecondary: 'blue',
+          colorSecondary: 'white',
           name: _values.name,
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),

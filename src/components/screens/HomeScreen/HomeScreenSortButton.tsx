@@ -32,6 +32,11 @@ export const HomeScreenSortButton: React.FC = observer(() => {
     cardStore.setSortBy('createdAt')
   }
 
+  const isSortByLastUsedAt = React.useMemo(() => cardStore.sorter.sortBy === 'lastUsedAt', [cardStore.sorter.sortBy])
+  const setSortByLastUsedAt = () => {
+    cardStore.setSortBy('lastUsedAt')
+  }
+
   return (
     <Menu
       visible={visible}
@@ -59,6 +64,12 @@ export const HomeScreenSortButton: React.FC = observer(() => {
         leadingIcon={isSortByCreatedAt ? 'radiobox-marked' : 'radiobox-blank'}
         onPress={setSortByCreatedAt}
         title={t('sort.sortBy.createdAt')}
+      />
+
+      <Menu.Item
+        leadingIcon={isSortByLastUsedAt ? 'radiobox-marked' : 'radiobox-blank'}
+        onPress={setSortByLastUsedAt}
+        title={t('sort.sortBy.lastUsedAt')}
       />
     </Menu>
   )

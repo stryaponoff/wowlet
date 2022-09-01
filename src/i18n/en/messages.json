@@ -10,7 +10,8 @@
   "sort": {
     "sortBy": {
       "name": "Name",
-      "createdAt": "Date"
+      "createdAt": "Date",
+      "lastUsedAt": "Last usage"
     }
   },
   "HomeScreen": {

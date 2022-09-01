@@ -15,8 +15,4 @@ export default class Card {
   public updatedAt!: DateTime
   public lastUsedAt?: DateTime
   public deletedAt?: DateTime
-
-  public get isDeleted() {
-    return !!this.deletedAt
-  }
 }
