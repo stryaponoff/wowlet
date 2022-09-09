@@ -11,7 +11,14 @@ type ScanResultScreenProps = StackScreenProps<MainNavigatorParamList, typeof Sca
 
 export const ScanResultScreen: React.FC<ScanResultScreenProps> = ({ navigation, route }) => {
   const navigateToHomeScreen = () => {
-    navigation.replace(HomeScreenName)
+    navigation.reset({
+      index: 0,
+      routes: [
+        {
+          name: HomeScreenName,
+        },
+      ],
+    })
   }
 
   return (
