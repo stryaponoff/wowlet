@@ -9,9 +9,9 @@ jobs:
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-      - name: Lint
-        run: yarn lint
       - name: Install modules
         run: yarn --immutable
+      - name: Lint
+        run: yarn lint
       - name: Run tests
         run: yarn test
