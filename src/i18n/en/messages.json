@@ -40,7 +40,8 @@
   "ScanScreen": {
     "title": "Scan barcode",
     "form": {
-      "submit": "Add card",
+      "submitNew": "Add card",
+      "submitEdit": "Save card",
       "sections": {
         "scannedData": {
           "header": "Barcode data"
@@ -77,10 +78,14 @@
   "ScanResultScreen": {
     "title": "Add new card"
   },
+  "CardEditScreen": {
+    "title": "Edit \"{{name}}\" card"
+  },
   "BarcodeScreen": {
     "header": {
       "threeDotMenu": {
-        "deleteButton": "Delete"
+        "deleteButton": "Delete",
+        "editButton": "Edit"
       }
     }
   },

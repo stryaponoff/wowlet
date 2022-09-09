@@ -30,12 +30,12 @@ export const ColorPickerInput = forwardRef<NativeTextInput, ColorPickerInputProp
 
     const leftIcon = icon
       ? (
-        <PaperTextInput.Icon name={icon} />
+        <PaperTextInput.Icon icon={icon} />
       )
       : undefined
 
     const rightIcon: React.ReactNode = (
-      <PaperTextInput.Icon name="eyedropper" onPress={openPicker} />
+      <PaperTextInput.Icon icon="eyedropper" onPress={openPicker} />
     )
 
     return (

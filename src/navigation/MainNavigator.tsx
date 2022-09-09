@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { HomeScreen, HomeScreenName } from '@/screens/HomeScreen'
 import { Appbar } from 'react-native-paper'
 import { ScanResultScreen, ScanResultScreenName } from '@/screens/ScanResultScreen'
+import { CardEditScreen, CardEditScreenName } from '@/screens/CardEditScreen'
 import { ScanScreen, ScanScreenName } from '@/screens/ScanScreen'
 import type { Barcode } from '@/services/barcode/types'
 import { useTranslation } from 'react-i18next'
@@ -16,6 +17,9 @@ export type MainNavigatorParamList = {
   [ScanScreenName]: undefined
   [ScanResultScreenName]: {
     barcode: Barcode
+  },
+  [CardEditScreenName]: {
+    cardId: string
   },
   [BarcodeScreenName]: {
     cardId: RecordFieldType<Card, 'id'>
@@ -52,6 +56,12 @@ const MainNavigator: React.FC = () => {
       <Stack.Screen
         name={BarcodeScreenName}
         component={BarcodeScreen}
+      />
+
+      <Stack.Screen
+        name={CardEditScreenName}
+        component={CardEditScreen}
+        options={{ title: t('CardEditScreen.title') }}
       />
 
       <Stack.Screen

@@ -16,6 +16,7 @@ import { Appbar } from 'react-native-paper'
 import { ThreeDotMenu } from '@/components/ThreeDotMenu'
 import { HomeScreenName } from '@/screens/HomeScreen'
 import { useSnackbar } from '@/providers/SnackbarProvider/useSnackbar'
+import { CardEditScreenName } from '@/screens/CardEditScreen'
 
 export const BarcodeScreenName = 'BarcodeScreen' as const
 type BarcodeScreenProps = StackScreenProps<MainNavigatorParamList, typeof BarcodeScreenName>
@@ -50,6 +51,14 @@ export const BarcodeScreen: React.FC<BarcodeScreenProps> = observer(({ navigatio
 
           <ThreeDotMenu
             items={[
+              {
+                key: 'edit',
+                icon: 'pencil',
+                label: t('BarcodeScreen.header.threeDotMenu.editButton'),
+                onPress: () => {
+                  nav.push(CardEditScreenName, { cardId: card.id })
+                },
+              },
               {
                 key: 'delete',
                 icon: 'delete',

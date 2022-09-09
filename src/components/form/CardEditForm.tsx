@@ -1,4 +1,4 @@
-import React, { useCallback, useLayoutEffect, useRef } from 'react'
+import React, { useCallback, useLayoutEffect, useMemo, useRef } from 'react'
 import { List } from 'react-native-paper'
 import TextInput from '@/components/form/fields/TextInput'
 import BarcodeFormatDropdown from '@/components/form/fields/BarcodeFormatDropdown'
@@ -6,10 +6,10 @@ import Button from '@/components/buttons/Button'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet } from 'react-native'
 import type { Barcode } from '@/services/barcode/types'
+import { BarcodeFormatArr } from '@/services/barcode/types'
 import type { RecordFieldType } from '@/utils/types/RecordFieldType'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { BarcodeFormatArr } from '@/services/barcode/types'
 import { useInjection } from 'inversify-react'
 import { Services } from '@/ioc/services'
 import { DateTime } from 'luxon'
@@ -17,11 +17,27 @@ import uuid from 'react-native-uuid'
 import { observer } from 'mobx-react'
 import type { CardStore } from '@/services/store/CardStore'
 import { ColorPickerInput } from '@/components/form/fields/ColorPickerInput'
+import { isRecordUnknown } from '@/utils/guards/isRecordUnknown'
 
-type CardAddFormProps = {
-  barcode: Barcode
-  onAfterSubmit?: () => void,
+type CardGeneralProps = {
+  onAfterSubmit?: () => void
 }
+
+type CardExistingProps = CardGeneralProps & {
+  cardId: string
+  barcode?: never
+}
+
+const isCardExistingProps = (value: unknown): value is CardExistingProps => {
+  return isRecordUnknown(value) && typeof value.cardId === 'string'
+}
+
+type CardNewProps = CardGeneralProps & {
+  barcode: Barcode
+  cardId?: never
+}
+
+type CardAddFormProps = CardNewProps | CardExistingProps
 
 type CardAddFormFields = {
   code: RecordFieldType<Barcode, 'code'>
@@ -31,19 +47,45 @@ type CardAddFormFields = {
   colorSecondary: string
 }
 
-export const CardAddForm: React.FC<CardAddFormProps> = observer(
-  ({ barcode, onAfterSubmit }) => {
-    const cardStore = useInjection<CardStore>(Services.CardStore)
+export const CardEditForm: React.FC<CardAddFormProps> = observer(
+  (props) => {
     const { t } = useTranslation()
+    const cardStore = useInjection<CardStore>(Services.CardStore)
+
+    const isNew = useMemo(() => !isCardExistingProps(props), [props])
+    const card = useMemo(() => {
+      if (!isCardExistingProps(props)) {
+        return null
+      }
+
+      return cardStore.get(props.cardId)
+    }, [cardStore.all])
+
+    const initialValues = useMemo(
+      () => {
+        if (isCardExistingProps(props)) {
+          return {
+            name: card!.name,
+            code: card!.barcode.code,
+            codeFormat: card!.barcode.format,
+            colorPrimary: card!.colorPrimary,
+            colorSecondary: card!.colorSecondary,
+          }
+        }
+
+        return {
+          name: '',
+          code: props.barcode.code,
+          codeFormat: props.barcode.format,
+          colorPrimary: '#b69df8',
+          colorSecondary: '#ffffff',
+        }
+      },
+      [props, cardStore.all]
+    )
 
     const { handleBlur, handleChange, handleSubmit, setFieldValue, values, errors, touched } = useFormik<CardAddFormFields>({
-      initialValues: {
-        name: '',
-        code: barcode.code,
-        codeFormat: barcode.format,
-        colorPrimary: '#b69df8',
-        colorSecondary: '#ffffff',
-      },
+      initialValues,
       validateOnBlur: true,
       validateOnChange: true,
       validateOnMount: false,
@@ -64,20 +106,32 @@ export const CardAddForm: React.FC<CardAddFormProps> = observer(
           ),
       }),
       onSubmit: async _values => {
-        cardStore.insert(String(uuid.v4()), {
-          barcode: {
-            code: _values.code,
-            format: _values.codeFormat,
-          },
-          colorPrimary: _values.colorPrimary,
-          colorSecondary: _values.colorSecondary,
-          name: _values.name,
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
-        })
+        if (isNew) {
+          cardStore.insert(String(uuid.v4()), {
+            barcode: {
+              code: _values.code,
+              format: _values.codeFormat,
+            },
+            colorPrimary: _values.colorPrimary,
+            colorSecondary: _values.colorSecondary,
+            name: _values.name,
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+          })
+        } else if (card) {
+          cardStore.update(card.id, {
+            barcode: {
+              code: _values.code,
+              format: _values.codeFormat,
+            },
+            colorPrimary: _values.colorPrimary,
+            colorSecondary: _values.colorSecondary,
+            name: _values.name,
+          })
+        }
 
-        if (onAfterSubmit) {
-          onAfterSubmit()
+        if (props.onAfterSubmit) {
+          props.onAfterSubmit()
         }
       },
     })
@@ -165,10 +219,10 @@ export const CardAddForm: React.FC<CardAddFormProps> = observer(
         </List.Section>
 
         <Button
-          icon="credit-card-plus-outline"
+          icon={isNew ? 'credit-card-plus-outline' : 'credit-card-edit-outline'}
           onPress={handleSubmit}
         >
-          {t('ScanScreen.form.submit')}
+          {isNew ? t('ScanScreen.form.submitNew') : t('ScanScreen.form.submitEdit')}
         </Button>
       </>
     )

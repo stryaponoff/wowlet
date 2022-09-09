@@ -21,7 +21,7 @@ export const TextInput = forwardRef<NativeTextInput, TextInputProps>(
 
     const leftIcon = icon
       ? (
-        <PaperTextInput.Icon name={icon} />
+        <PaperTextInput.Icon icon={icon} />
       )
       : undefined
 
