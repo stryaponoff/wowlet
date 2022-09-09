@@ -77,7 +77,7 @@ export const BarcodeScreen: React.FC<BarcodeScreenProps> = observer(({ navigatio
 
   return (
     <BaseScreenWrapper>
-      <BaseContentWrapper>
+      <BaseContentWrapper noScroll>
         <View style={styles.barcodeWrapper}>
           {card.barcode.format === 'QR'
             ? <QRCode value={card.barcode.code}/>
@@ -90,7 +90,7 @@ export const BarcodeScreen: React.FC<BarcodeScreenProps> = observer(({ navigatio
 
 const styles = StyleSheet.create({
   barcodeWrapper: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
