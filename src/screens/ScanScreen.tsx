@@ -58,7 +58,7 @@ export const ScanScreen: React.FC<ScanScreenProps> = ({ navigation }) => {
 
   return (
     <BaseScreenWrapper>
-      <BaseContentWrapper>
+      <BaseContentWrapper noScroll>
         {isCameraPermissionsGranted && backCamera ? (
           <Camera
             device={backCamera}

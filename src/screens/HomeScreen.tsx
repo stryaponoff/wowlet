@@ -66,7 +66,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = observer(({ navigation }) =
 
   return (
     <BaseScreenWrapper>
-      <BaseContentWrapper noHorizontalPadding>
+      <BaseContentWrapper noScroll noHorizontalPadding>
         <CardList
           data={cardStore.all}
           onPress={cardId => navigateToBarcodeScreen(cardId)}

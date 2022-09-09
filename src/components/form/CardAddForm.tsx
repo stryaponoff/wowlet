@@ -16,6 +16,7 @@ import { DateTime } from 'luxon'
 import uuid from 'react-native-uuid'
 import { observer } from 'mobx-react'
 import type { CardStore } from '@/services/store/CardStore'
+import { ColorPickerInput } from '@/components/form/fields/ColorPickerInput'
 
 type CardAddFormProps = {
   barcode: Barcode
@@ -26,6 +27,8 @@ type CardAddFormFields = {
   code: RecordFieldType<Barcode, 'code'>
   codeFormat: RecordFieldType<Barcode, 'format'>
   name: string
+  colorPrimary: string
+  colorSecondary: string
 }
 
 export const CardAddForm: React.FC<CardAddFormProps> = observer(
@@ -38,6 +41,8 @@ export const CardAddForm: React.FC<CardAddFormProps> = observer(
         name: '',
         code: barcode.code,
         codeFormat: barcode.format,
+        colorPrimary: '#b69df8',
+        colorSecondary: '#ffffff',
       },
       validateOnBlur: true,
       validateOnChange: true,
@@ -64,8 +69,8 @@ export const CardAddForm: React.FC<CardAddFormProps> = observer(
             code: _values.code,
             format: _values.codeFormat,
           },
-          colorPrimary: 'red',
-          colorSecondary: 'white',
+          colorPrimary: _values.colorPrimary,
+          colorSecondary: _values.colorSecondary,
           name: _values.name,
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
@@ -133,21 +138,31 @@ export const CardAddForm: React.FC<CardAddFormProps> = observer(
           />
         </List.Section>
 
-        {/*<List.Section title={t('ScanScreen.form.sections.appearance.header')}>*/}
-        {/*  <TextInput*/}
-        {/*    label={t('ScanScreen.form.fields.primaryColor.label')}*/}
-        {/*    placeholder={t('ScanScreen.form.fields.primaryColor.placeholder')}*/}
-        {/*    style={styles.marginBottom}*/}
-        {/*    icon="eyedropper"*/}
-        {/*  />*/}
+        <List.Section title={t('ScanScreen.form.sections.appearance.header')}>
+          <ColorPickerInput
+            label={t('ScanScreen.form.fields.primaryColor.label')}
+            placeholder={t('ScanScreen.form.fields.primaryColor.placeholder')}
+            style={styles.marginBottom}
+            icon="palette"
+            onChangeText={handleChange('colorPrimary')}
+            onBlur={handleBlur('colorPrimary')}
+            value={values.colorPrimary}
+            hasError={hasErrors('colorPrimary')}
+            errorText={errors.colorPrimary}
+          />
 
-        {/*  <TextInput*/}
-        {/*    label={t('ScanScreen.form.fields.secondaryColor.label')}*/}
-        {/*    placeholder={t('ScanScreen.form.fields.secondaryColor.placeholder')}*/}
-        {/*    style={styles.marginBottom}*/}
-        {/*    icon="eyedropper-plus"*/}
-        {/*  />*/}
-        {/*</List.Section>*/}
+          <ColorPickerInput
+            label={t('ScanScreen.form.fields.secondaryColor.label')}
+            placeholder={t('ScanScreen.form.fields.secondaryColor.placeholder')}
+            style={styles.marginBottom}
+            icon="palette"
+            onChangeText={handleChange('colorSecondary')}
+            onBlur={handleBlur('colorSecondary')}
+            value={values.colorSecondary}
+            hasError={hasErrors('colorSecondary')}
+            errorText={errors.colorSecondary}
+          />
+        </List.Section>
 
         <Button
           icon="credit-card-plus-outline"

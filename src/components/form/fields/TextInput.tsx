@@ -21,7 +21,7 @@ export const TextInput = forwardRef<NativeTextInput, TextInputProps>(
 
     const leftIcon = icon
       ? (
-        <PaperTextInput.Icon name={icon} rippleColor="transparent" />
+        <PaperTextInput.Icon name={icon} />
       )
       : undefined
 

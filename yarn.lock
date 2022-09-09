@@ -3021,6 +3021,7 @@ __metadata:
     react-native-uuid: ^2.0.1
     react-native-vector-icons: ^9.2.0
     react-native-vision-camera: ^2.14.1
+    react-native-wheel-color-picker: ^1.2.0
     react-test-renderer: 18.2.0
     reflect-metadata: ^0.1.13
     rn-mmkv-storage-flipper: ^1.0.0
@@ -9153,6 +9154,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-elevation@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "react-native-elevation@npm:1.0.0"
+  checksum: 988edf86b441459e65f5121b0f916087c94dc0fb4bf7a36da4718b633644dbf10313054208cc4758302fbaa7e1d7b99d29004efc937466ecd7d66c2372f47129
+  languageName: node
+  linkType: hard
+
 "react-native-flipper@npm:^0.162.0":
   version: 0.162.0
   resolution: "react-native-flipper@npm:0.162.0"
@@ -9353,6 +9361,15 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 813b250a5adc38e38588b2a060ef2f93cbfaf90b9d3b946ffe8e0955143c6384e1a0b529d0f9a80aeb88def8918d3144d8ecea4ba169926dd7a8c1be01cc3dd8
+  languageName: node
+  linkType: hard
+
+"react-native-wheel-color-picker@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "react-native-wheel-color-picker@npm:1.2.0"
+  dependencies:
+    react-native-elevation: ^1.0.0
+  checksum: 886ea0d9cfbf87e92f5239a3f917c62063e0e5116f6b04467646dec5765ede16745636576da894c05796b1dfac0d73d79b9bff18789c29937eb8e4905ad5fbaf
   languageName: node
   linkType: hard
 
