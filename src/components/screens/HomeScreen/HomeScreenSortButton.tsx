@@ -7,9 +7,11 @@ import { observer } from 'mobx-react'
 import { useInjection } from 'inversify-react'
 import { Services } from '@/ioc/services'
 import type { CardStore } from '@/services/store/CardStore'
+import type { MainStore } from '@/services/store/MainStore'
 
 export const HomeScreenSortButton: React.FC = observer(() => {
   const cardStore = useInjection<CardStore>(Services.CardStore)
+  const mainStore = useInjection<MainStore>(Services.MainStore)
 
   const { t } = useTranslation()
 
@@ -44,14 +46,14 @@ export const HomeScreenSortButton: React.FC = observer(() => {
       anchor={<Appbar.Action icon="sort" onPress={openMenu} />}
     >
       <View style={styles.sortDirectionWrapper}>
-        <Icon name="sort-reverse-variant" size={24} />
+        <Icon name="sort-reverse-variant" size={24} color={mainStore.theme.colors.text} />
 
         <Switch
           value={isDesc}
           onValueChange={setIsDesc}
         />
 
-        <Icon name="sort-variant" size={24} />
+        <Icon name="sort-variant" size={24} color={mainStore.theme.colors.text} />
       </View>
 
       <Menu.Item
