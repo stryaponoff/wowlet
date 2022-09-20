@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type Card from '@/entities/Card'
+import type Card from '@/models/Card'
 import type { Sorter } from '@/services/card/types'
 import { injectable } from 'inversify'
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import type { LayoutChangeEvent } from 'react-native'
 import { StyleSheet, View } from 'react-native'
-import type Card from '@/entities/Card'
+import type Card from '@/models/Card'
 import { Avatar, Surface, Text, TouchableRipple } from 'react-native-paper'
 
 export type CardProps = {

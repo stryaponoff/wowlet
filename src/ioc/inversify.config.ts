@@ -2,6 +2,8 @@ import { Container } from 'inversify'
 import { Services } from '@/ioc/services'
 import 'reflect-metadata'
 
+// import { JsonSerializer } from 'typescript-json-serializer'
+
 import type CameraServiceInterface from '@/services/camera/CameraServiceInterface'
 import CameraService from '@/services/camera/CameraService'
 
@@ -27,6 +29,7 @@ import CardService from '@/services/card/CardService'
 
 const container = new Container()
 
+// container.bind<JsonSerializer>(Services.JsonSerializer).to(JsonSerializer).inSingletonScope()
 container.bind<LanguageServiceInterface>(Services.LanguageService).to(LanguageService).inSingletonScope()
 container.bind<CameraServiceInterface>(Services.CameraService).to(CameraService).inSingletonScope()
 container.bind<BarcodeServiceInterface>(Services.BarcodeService).to(BarcodeService).inSingletonScope()

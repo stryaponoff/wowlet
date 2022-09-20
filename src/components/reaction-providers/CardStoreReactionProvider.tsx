@@ -6,6 +6,7 @@ import { Services } from '@/ioc/services'
 import { reaction } from 'mobx'
 import type { CardStore } from '@/services/store/CardStore'
 import type CardService from '@/services/card/CardService'
+import { JsonSerializer } from 'typescript-json-serializer'
 
 const CardStoreReactionProvider: React.FC<PropsWithChildren> = observer(({ children }) => {
   const cardStore = useInjection<CardStore>(Services.CardStore)

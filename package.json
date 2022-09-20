@@ -52,6 +52,7 @@
     "react-native-vector-icons": "^9.2.0",
     "react-native-vision-camera": "^2.14.1",
     "react-native-wheel-color-picker": "^1.2.0",
+    "typescript-json-serializer": "^4.3.0",
     "vision-camera-code-scanner": "^0.2.0",
     "yup": "^0.32.11"
   },

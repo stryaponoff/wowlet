@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import CardComponent from '@/components/cards/card'
-import type Card from '@/entities/Card'
+import type Card from '@/models/Card'
 import type { RecordFieldType } from '@/utils/types/RecordFieldType'
 import { FlatGrid } from 'react-native-super-grid'
 import { StyleSheet, View } from 'react-native'

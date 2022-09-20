@@ -3088,6 +3088,7 @@ __metadata:
     rn-mmkv-storage-flipper: ^1.0.0
     ts-jest: ^28.0.8
     typescript: ^4.4.4
+    typescript-json-serializer: ^4.3.0
     vision-camera-code-scanner: ^0.2.0
     yorkie: ^2.0.0
     yup: ^0.32.11
@@ -10885,7 +10886,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.1":
+"tslib@npm:^2.0.1, tslib@npm:^2.3.0":
   version: 2.4.0
   resolution: "tslib@npm:2.4.0"
   checksum: 8c4aa6a3c5a754bf76aefc38026134180c053b7bd2f81338cb5e5ebf96fefa0f417bff221592bf801077f5bf990562f6264fecbc42cd3309b33872cb6fc3b113
@@ -10937,6 +10938,16 @@ __metadata:
   version: 0.7.1
   resolution: "type-fest@npm:0.7.1"
   checksum: 5b1b113529d59949d97b76977d545989ddc11b81bb0c766b6d2ccc65473cb4b4a5c7d24f5be2c2bb2de302a5d7a13c1732ea1d34c8c59b7e0ec1f890cf7fc424
+  languageName: node
+  linkType: hard
+
+"typescript-json-serializer@npm:^4.3.0":
+  version: 4.3.0
+  resolution: "typescript-json-serializer@npm:4.3.0"
+  dependencies:
+    reflect-metadata: ^0.1.13
+    tslib: ^2.3.0
+  checksum: 8db36187b8a0547452771fd30319b2dc9e1152aecf2c8974f00a462a1f22ca0d66151715c58797a1698a2ae334b7f2e97c9bb4619ff354aca1a00ae43e42b8c5
   languageName: node
   linkType: hard
 

@@ -8,7 +8,7 @@ import { ScanScreen, ScanScreenName } from '@/screens/ScanScreen'
 import type { Barcode } from '@/services/barcode/types'
 import { useTranslation } from 'react-i18next'
 import { BarcodeScreen, BarcodeScreenName } from '@/screens/BarcodeScreen'
-import type Card from '@/entities/Card'
+import type Card from '@/models/Card'
 import type { RecordFieldType } from '@/utils/types/RecordFieldType'
 import { SettingsScreen, SettingsScreenName } from '@/screens/SettingsScreen'
 

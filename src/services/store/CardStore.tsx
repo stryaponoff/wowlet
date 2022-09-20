@@ -3,12 +3,13 @@ import { makeAutoObservable, set, values } from 'mobx'
 import type { BaseRepositoryInterface } from '@/services/store/BaseRepositoryInterface'
 import EntityAlreadyExistsError from '@/errors/EntityAlreadyExistsError'
 import EntityDoesNotExistError from '@/errors/EntityDoesNotExistError'
-import type Card from '@/entities/Card'
+import type { Card } from '@/models/Card'
 import AbsurdError from '@/errors/absurdError'
 import { Services } from '@/ioc/services'
 import type CardService from '@/services/card/CardService'
 import type { SortBy, SortDirection, Sorter } from '@/services/card/types'
 import { DateTime } from 'luxon'
+import { JsonSerializer } from 'typescript-json-serializer'
 
 @injectable()
 export class CardStore implements BaseRepositoryInterface<Card> {
@@ -157,6 +158,11 @@ export class CardStore implements BaseRepositoryInterface<Card> {
     @inject(Services.CardService) protected readonly cardService: CardService
   ) {
     this.entities = Object.fromEntries(this.cardService.getCards().map(card => [card.id, card]))
+
+    const serializer = new JsonSerializer()
+    // console.log('entities #1', serializer.serialize(Object.values(this.entities)))
+    console.log('entities #2', this.entities)
+
     this.sorter = this.cardService.getSorter()
 
     makeAutoObservable(this)

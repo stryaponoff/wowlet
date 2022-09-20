@@ -1,4 +1,4 @@
-import type Card from '@/entities/Card'
+import type Card from '@/models/Card'
 import type { Sorter } from '@/services/card/types'
 
 export default interface CardServiceInterface {
